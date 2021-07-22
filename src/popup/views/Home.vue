@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="container text-center">
     <img alt="Vue logo" src="../assets/images/logo.png" />
     <h1 class="text-red-500">App started! To The Moon🚀🌑</h1>
   </div>
@@ -13,3 +13,5 @@ export default defineComponent({
   components: {},
 })
 </script>
+
+<style></style>
