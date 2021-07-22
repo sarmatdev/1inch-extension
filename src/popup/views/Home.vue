@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/images/logo.png" />
-    <h1>App started! To The Moon🚀🌑</h1>
+    <h1 class="text-red-500">App started! To The Moon🚀🌑</h1>
   </div>
 </template>
 
