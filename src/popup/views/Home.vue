@@ -1,8 +1,7 @@
 <template>
-  <div class="home">
+  <div class="container text-center">
     <img alt="Vue logo" src="../assets/images/logo.png" />
-    <h1>App started! To The Moon🚀🌑</h1>
-    <p class="text-red-500 bg-black text-9xl">Tailwind test</p>
+    <h1 class="text-red-500">App started! To The Moon🚀🌑</h1>
   </div>
 </template>
 
