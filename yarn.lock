@@ -12364,8 +12364,7 @@ vue-jest@^5.0.0-0:
     source-map "0.5.6"
     tsconfig "^7.0.0"
 
-"vue-loader-v16@npm:vue-loader@^16.1.0", vue-loader@^16.1.2:
-  name vue-loader-v16
+"vue-loader-v16@npm:vue-loader@^16.1.0", vue-loader@^16.3.3:
   version "16.3.3"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.3.3.tgz#e440e4eb12786e16138b5d98b612208f29ddf532"
   integrity sha512-/1GzCuQ6MRORbC+leKTKoTGtpQt60bYe0gDGEextSteA2OM+v201FPha5jzmjQzVhRcwieZeUvezAtG5a/e5cw==
