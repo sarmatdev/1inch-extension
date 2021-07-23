@@ -2,6 +2,7 @@
   <div class="container text-center">
     <img alt="Vue logo" src="../assets/images/logo.png" />
     <h1 class="text-red-500">App started! To The Moon🚀🌑</h1>
+    <base-button>Base registration test</base-button>
   </div>
 </template>
 
