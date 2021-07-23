@@ -13,6 +13,16 @@ export default defineComponent({})
 </script>
 
 <style lang="scss">
+body {
+  width: 100vw;
+  min-width: 300px;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,8 +30,11 @@ export default defineComponent({})
   text-align: center;
   color: #2c3e50;
   overflow: hidden;
+  font-size: 1rem;
+  line-height: 1.5;
   width: 300px;
   height: 600px;
+  box-shadow: 0px 5px 15px #27262633;
 }
 
 #nav {
