@@ -5,7 +5,6 @@ import store from './store'
 import { registerBaseComponents } from './helpers/registerBaseComponents'
 import './styles/tailwind.css'
 
-
 export const app = createApp(App)
 
 // Register base components

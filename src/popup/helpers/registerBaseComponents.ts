@@ -1,12 +1,11 @@
-/* eslint-disable */
+import { App } from 'vue'
 import { camelCase, upperFirst } from 'lodash-es'
 
-// @ts-ignore
-export const registerBaseComponents = (vm) => {
+export const registerBaseComponents = (app: App): void => {
   const requireComponent = require.context(
     '../components/base',
     true,
-    /Base[\w-]+\.vue$/,
+    /Base[\w-]+\.vue$/
   )
 
   requireComponent.keys().forEach((filePath) => {
@@ -14,6 +13,6 @@ export const registerBaseComponents = (vm) => {
     const fileName = filePath.split('/').slice(-1)[0]
     const componentName = upperFirst(camelCase(fileName.replace(/\.\w+$/, '')))
 
-    vm.component(componentName, componentConfig.default || componentConfig)
+    app.component(componentName, componentConfig.default || componentConfig)
   })
 }
