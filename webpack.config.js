@@ -9,6 +9,7 @@ const commonConfig = {
   mode: process.env.NODE_ENV,
   context: path.resolve(__dirname, './src'),
   entry: {
+    'background/index': './background/index.js',
     'popup/index': './popup/index.ts',
   },
   output: {
