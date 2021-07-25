@@ -8,12 +8,12 @@ export interface WalletsState {
 }
 
 const state = {
-  accounts: [],
+  accounts: []
 }
 const mutations = {
   setWallet(state: WalletsState, account: Account): void {
     state.accounts.push(account)
-  },
+  }
 }
 const actions = {}
 const getters = {}
@@ -23,5 +23,5 @@ export default {
   state,
   mutations,
   actions,
-  getters,
+  getters
 }

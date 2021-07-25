@@ -9,7 +9,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-export default defineComponent({})
+export default defineComponent({
+  setup() {
+    console.log('Hello, 1inch!🦄')
+  }
+})
 </script>
 
 <style lang="scss">
@@ -22,6 +26,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
