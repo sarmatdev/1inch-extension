@@ -1,13 +1,17 @@
 <template>
-  <button><slot></slot></button>
+  <h1 class="title"><slot /></h1>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'BaseButton'
+  name: 'BaseTitle'
 })
 </script>
 
-<style></style>
+<style>
+.title {
+  @apply text-sm text-white text-left;
+}
+</style>
