@@ -5,7 +5,10 @@ module.exports = {
     extend: {}
   },
   variants: {
-    extend: {}
+    extend: {
+      margin: ['first', 'last'],
+      transitionProperty: ['hover', 'focus']
+    }
   },
   plugins: []
 }
