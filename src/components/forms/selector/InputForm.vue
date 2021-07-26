@@ -1,7 +1,7 @@
 <template>
   <div class="selector__input">
     <input
-    :value="modelValue"
+      :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       class="selector__input--container"
       :type="type"
