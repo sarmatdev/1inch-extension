@@ -27,13 +27,18 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #617ba3;
-  overflow: hidden;
+  overflow: scroll;
   padding: 10px;
   font-weight: 500;
   font-size: 1rem;
