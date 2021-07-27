@@ -15,7 +15,8 @@ export default defineComponent({
 <style lang="scss">
 .base-warning {
   padding: 10px 20px;
-  background-color: rgb(231, 208, 117);
+  background-color: rgba(255, 156, 8, 0.3);
+  color: #fff;
   border-radius: 10px;
 }
 </style>
