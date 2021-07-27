@@ -1,3 +1,6 @@
+/* eslint-disable no-empty-pattern */
+import { setStorageItem } from '@/services/storage'
+
 interface Account {
   name: string
   address: string
@@ -15,7 +18,12 @@ const mutations = {
     state.accounts.push(account)
   }
 }
-const actions = {}
+const actions = {
+  storeWallet({ commit }, wallet) {
+    console.log('wallet', wallet)
+    return setStorageItem(wallet.name, wallet)
+  }
+}
 const getters = {}
 
 export default {
