@@ -1,20 +1,20 @@
 <template>
-  <div @click="$emit('click', $event)" class="ticker">
-    <base-icon class="ticker--icon" :icon="`${icon}`"></base-icon>
-    <div class="ticker__container">
-      <ul class="ticker__container--item">
-        <li class="ticker__container--symbol">
+  <div @click="$emit('click', $event)" class="token__input__ticker">
+    <base-icon class="token__input__ticker--icon" :icon="`${icon}`"></base-icon>
+    <div class="token__input__ticker__container">
+      <ul class="token__input__ticker__container--item">
+        <li class="token__input__ticker__container--symbol">
           <base-title><slot name="symbol"></slot></base-title>
         </li>
-        <li class="ticker__container--token">
+        <li class="token__input__ticker__container--token">
           <slot name="token"></slot>
         </li>
       </ul>
-      <ul class="ticker__container--item">
-        <li class="ticker__container--name">
+      <ul class="token__input__ticker__container--item">
+        <li class="token__input__ticker__container--name">
           <base-title><slot name="name"></slot></base-title>
         </li>
-        <li class="ticker__container--price">
+        <li class="token__input__ticker__container--price">
           <slot name="price"></slot>
         </li>
       </ul>
@@ -33,8 +33,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-.ticker {
+<style lang="scss" scoped>
+.token__input__ticker {
   @apply flex
       items-center
       p-2.5

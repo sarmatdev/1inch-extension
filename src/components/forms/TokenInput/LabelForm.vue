@@ -1,5 +1,5 @@
 <template>
-  <h1 class="selector__label"><slot /></h1>
+  <span class="token__input__label"><slot /></span>
 </template>
 
 <script lang="ts">
@@ -10,8 +10,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-.selector__label {
-  @apply text-base text-gray-500 bg-black;
+<style lang="scss" scoped>
+.token__input__label {
+  @apply w-full text-base text-gray-500 bg-black;
 }
 </style>
