@@ -21,10 +21,13 @@ const mutations = {
 const actions = {
   storeWallet({ commit }, wallet) {
     console.log('wallet', wallet)
-    return setStorageItem(wallet.name, wallet)
+    commit('setWallet', wallet)
+    setStorageItem(wallet.name, wallet)
   }
 }
-const getters = {}
+const getters = {
+  accounts: (s) => s.accounts
+}
 
 export default {
   namespaced: true,
