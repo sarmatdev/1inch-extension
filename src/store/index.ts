@@ -4,5 +4,9 @@ import modules from './modules'
 
 export default createStore({
   modules,
-  plugins: [createPersistedState()]
+  plugins: [
+    createPersistedState({
+      paths: Object.keys(modules)
+    })
+  ]
 })
