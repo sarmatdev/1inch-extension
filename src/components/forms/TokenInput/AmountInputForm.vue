@@ -1,9 +1,9 @@
 <template>
-  <div class="selector__input">
+  <div class="token__amount__input">
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-      class="selector__input--container"
+      class="token__amount__input--container"
       :type="type"
       :placeholder="placeholder"
     />
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'InputForm',
+  name: 'AmountInputForm',
   props: {
     modelValue: String,
     placeholder: String,
@@ -24,8 +24,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.selector__input {
+<style lang="scss" scoped>
+.token__amount__input {
   @apply flex
       items-center
       p-1.5

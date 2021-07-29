@@ -1,5 +1,5 @@
 <template>
-  <h1 class="selector__description"><slot /></h1>
+  <h1 class="token__input__description"><slot /></h1>
 </template>
 
 <script>
@@ -8,8 +8,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.selector__description {
+<style lang="scss" scoped>
+.token__input__description {
   @apply text-base text-gray-600 font-bold px-1.5;
 }
 </style>

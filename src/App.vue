@@ -44,7 +44,7 @@ body {
   line-height: 1.5;
   width: 300px;
   height: 600px;
-  background-color: #1e2129;
+  @apply font-main bg-back-9;
   box-shadow: 0px 5px 15px #27262633;
 }
 

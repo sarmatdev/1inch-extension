@@ -1,29 +1,34 @@
 <template>
-  <div class="selector">
-    <div class="selector__description">
+  <div class="token__input">
+    <div class="token__input__description--field">
       <description-form>{{ description }}</description-form>
       <description-form>Balance:{{ wallet }}</description-form>
     </div>
     <Menu>
-      <div class="selector__header">
-        <template class="selector__header--item">
-          <label-form>
+      <div class="token__input__header">
+        <template class="token__input__header--item">
+          <label-form class="token__input__header--item--name">
             {{ selectedTicker.name }}
           </label-form>
-          <label-form> ~${{ selectedTicker.price }} </label-form>
+          <label-form class="token__input__header--item--price">
+            ~${{ selectedTicker.price }}
+          </label-form>
         </template>
-        <template class="selector__header--item">
+        <template class="token__input__header--item">
           <MenuButton>
             <button-form :icon="`${selectedTicker.icon}`">
               {{ selectedTicker.symbol }}
             </button-form>
           </MenuButton>
-          <input-form v-model="token" placeholder="0.0"></input-form>
+          <amount-input-form
+            v-model="token"
+            placeholder="0.0"
+          ></amount-input-form>
         </template>
       </div>
       <MenuItems>
-        <div class="selector__items">
-          <div class="selector__items--container">
+        <div class="token__input__items">
+          <div class="token__input__items--container">
             <MenuItem disabled>
               <search-input-form
                 v-model="ticker"
@@ -47,15 +52,15 @@
 
 <script>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import TickerForm from '../forms/selector/TickerForm.vue'
-import SearchInputForm from '../forms/selector/SearchInputForm.vue'
-import InputForm from '../forms/selector/InputForm.vue'
-import ButtonForm from '../forms/selector/ButtonForm.vue'
-import LabelForm from '../forms/selector/LabelForm.vue'
-import DescriptionForm from '../forms/selector/DescriptionForm.vue'
+import TickerForm from '../../forms/TokenInput/TickerForm.vue'
+import SearchInputForm from '../../forms/TokenInput/SearchInputForm.vue'
+import AmountInputForm from '../../forms/TokenInput/AmountInputForm.vue'
+import ButtonForm from '../../forms/TokenInput/ButtonForm.vue'
+import LabelForm from '../../forms/TokenInput/LabelForm.vue'
+import DescriptionForm from '../../forms/TokenInput/DescriptionForm.vue'
 
 export default {
-  name: 'BaseSelector',
+  name: 'TokenInput',
   components: {
     Menu,
     MenuButton,
@@ -63,7 +68,7 @@ export default {
     MenuItem,
     SearchInputForm,
     TickerForm,
-    InputForm,
+    AmountInputForm,
     ButtonForm,
     LabelForm,
     DescriptionForm
@@ -81,7 +86,7 @@ export default {
         symbol: 'ETC',
         token: '00.2',
         price: '33345',
-        icon: 'eth'
+        icon: '/network-select/eth'
       },
       tickers: [
         {
@@ -90,7 +95,7 @@ export default {
           symbol: 'ETC',
           token: '00.2',
           price: '33345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 0,
@@ -98,7 +103,7 @@ export default {
           symbol: 'BTC',
           token: '00.2',
           price: '33345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 1,
@@ -106,7 +111,7 @@ export default {
           symbol: 'DOGE',
           token: '1.2',
           price: '12.23',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -114,7 +119,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -122,7 +127,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -130,7 +135,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -138,7 +143,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -146,7 +151,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -154,7 +159,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -162,7 +167,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         },
         {
           index: 2,
@@ -170,7 +175,7 @@ export default {
           symbol: 'DAI',
           token: '23.22',
           price: '3.345',
-          icon: 'eth'
+          icon: '/network-select/eth'
         }
       ]
       //=========================================
@@ -186,39 +191,45 @@ export default {
     filteredTickers() {
       return this.tickers.filter(
         (el) =>
-          el.name.toUpperCase().includes(this.ticker.toUpperCase()) ||
-          el.symbol.toUpperCase().includes(this.ticker.toUpperCase())
+          el.name.toUpperCase().includes(this.ticker.trim().toUpperCase()) ||
+          el.symbol.toUpperCase().includes(this.ticker.trim().toUpperCase())
       )
     }
   }
 }
 </script>
 
-<style lang="scss">
-.selector {
+<style lang="scss" scoped>
+.token__input {
   @apply relative;
-  &__description {
+  &__description--field {
     @apply flex justify-between items-center;
   }
   &__header {
-    @apply relative p-2.5 z-50 w-full border-0 border-solid rounded-2xl bg-black;
+    @apply relative p-2.5 z-0 w-full border-0 border-solid rounded-2xl bg-black;
     &--item {
       @apply flex
             justify-between
             items-center;
+      &--name {
+        @apply text-left;
+      }
+      &--price {
+        @apply text-right;
+      }
     }
   }
   &__items {
     @apply absolute
           w-full
-          top-14
-          overflow-y-auto
-          z-0
+          top-6
+          z-50
           bg-gray-800
           rounded-2xl
-          pt-12
+          py-2.5
           px-2.5
-          h-64;
+          h-64
+          overflow-y-scroll;
     &--container {
       @apply grid gap-y-2 grid-cols-1;
     }
@@ -230,7 +241,7 @@ export default {
       @apply bg-transparent;
     }
     &::-webkit-scrollbar-thumb {
-      @apply bg-gray-500;
+      @apply bg-gray-500 rounded-sm;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="icon">
-    <img :src="require(`@/assets/icons/${icon}.svg`)" alt="" />
+    <img :src="require(`@/assets/icons${icon}.svg`)" alt="" />
   </div>
 </template>
 
@@ -15,4 +15,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.icon {
+  @apply flex justify-center items-center w-8 h-8;
+}
+</style>

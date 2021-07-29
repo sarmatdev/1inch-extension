@@ -12,6 +12,6 @@ export default defineComponent({
 
 <style>
 .title {
-  @apply text-sm text-white text-left;
+  @apply text-sm text-white font-medium text-left;
 }
 </style>
