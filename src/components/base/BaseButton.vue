@@ -1,5 +1,6 @@
 <template>
   <component
+    @click="$emit('click', $event)"
     :is="rootTag"
     :to="to"
     :class="[$style.baseButton, $style[`baseButton--${color}`]]"
@@ -41,7 +42,7 @@ export default defineComponent({
 <style module lang="scss">
 .baseButton {
   min-width: 4rem;
-  @apply flex items-center font-semibold justify-center text-white px-3 py-2 rounded-md cursor-pointer outline-none transition-colors duration-200;
+  @apply flex items-center font-semibold justify-center text-blue-300 px-3 py-2 rounded-xl cursor-pointer outline-none transition-colors duration-200;
   &:disabled {
     cursor: not-allowed;
     @apply bg-gray-500;
@@ -53,7 +54,7 @@ export default defineComponent({
     @apply bg-green-500 hover:bg-green-600;
   }
   &--blue {
-    @apply bg-blue-500 hover:bg-blue-600;
+    @apply bg-opacity-75 bg-blue-800 hover:bg-blue-700;
   }
   &--red {
     @apply bg-red-500 hover:bg-red-600;

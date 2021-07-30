@@ -1,6 +1,9 @@
 <template>
   <div @click="$emit('click', $event)" class="token__input__button">
-    <base-icon :icon="`${icon}`" class="token__input__button--icon"></base-icon>
+    <base-icon
+      :icon="buttonIcon"
+      class="token__input__button--icon"
+    ></base-icon>
     <base-title><slot /></base-title>
     <base-icon
       icon="/input-btn/down"
@@ -15,7 +18,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'ButtonForm',
   props: {
-    icon: {
+    buttonIcon: {
       type: String,
       default: '/network-select/eth'
     }
@@ -25,9 +28,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .token__input__button {
-  @apply flex items-center bg-black;
+  @apply flex items-center bg-black text-word-3;
   &--icon {
-    @apply first:mr-2.5;
+    @apply w-4 h-4 first:mr-2.5 last:ml-2.5;
   }
 }
 </style>

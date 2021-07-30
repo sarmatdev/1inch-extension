@@ -12,6 +12,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .token__input__label {
-  @apply w-full text-base text-gray-500 bg-black;
+  @apply w-full text-base text-word-5 bg-black;
 }
 </style>

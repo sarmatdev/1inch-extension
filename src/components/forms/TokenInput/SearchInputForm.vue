@@ -1,7 +1,8 @@
 <template>
   <div class="token__input__search">
     <base-icon
-      icon="/input-btn/search"
+      v-if="icon"
+      :icon="searchIcon"
       class="token__input__search--icon"
     ></base-icon>
     <input
@@ -22,7 +23,8 @@ export default defineComponent({
   props: {
     modelValue: String,
     placeholder: String,
-    type: String
+    type: String,
+    searchIcon: String
   }
 })
 </script>
@@ -36,7 +38,7 @@ export default defineComponent({
       rounded-xl
       bg-black;
   &--container {
-    @apply bg-black h-full w-full outline-none text-white ml-2.5;
+    @apply bg-black h-full w-full outline-none text-word-3 ml-2.5;
   }
 }
 </style>

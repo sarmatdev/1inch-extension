@@ -1,6 +1,6 @@
 <template>
   <div class="icon">
-    <img :src="require(`@/assets/icons${icon}.svg`)" alt="" />
+    <img :src="require(`@/icons/${icon}.png`)" alt="" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'BaseIcon',
+  name: 'BaseLogo',
   props: {
     icon: String
   }

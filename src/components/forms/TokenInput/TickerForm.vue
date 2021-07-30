@@ -1,6 +1,6 @@
 <template>
   <div @click="$emit('click', $event)" class="token__input__ticker">
-    <base-icon class="token__input__ticker--icon" :icon="`${icon}`"></base-icon>
+    <base-icon class="token__input__ticker--icon" :icon="tickerIcon"></base-icon>
     <div class="token__input__ticker__container">
       <ul class="token__input__ticker__container--item">
         <li class="token__input__ticker__container--symbol">
@@ -28,7 +28,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'TickerForm',
   props: {
-    icon: String
+    tickerIcon: String
   }
 })
 </script>
@@ -45,14 +45,17 @@ export default defineComponent({
     @apply bg-gray-700 transition;
   }
   &--icon {
-    @apply mr-2.5;
+    @apply w-10 h-10 mr-2.5;
   }
   &__container {
     @apply flex items-center justify-between w-full;
     &--price,
     &--token {
-      @apply text-sm;
-      color: #7e96b8;
+      @apply text-sm text-word-5;
+    }
+    &--name,
+    &--symbol {
+      @apply text-word-3;
     }
     &--price,
     &--name {

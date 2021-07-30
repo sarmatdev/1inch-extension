@@ -10,6 +10,6 @@ export default {
 
 <style lang="scss" scoped>
 .token__input__description {
-  @apply text-base text-gray-600 font-bold px-1.5;
+  @apply text-base text-word-4 font-bold px-1.5;
 }
 </style>
