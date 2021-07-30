@@ -1,14 +1,55 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/welcome">Welcome</router-link>
+  <div class="header__menu">
+    <base-wrapper>
+      <base-logo
+        @click="$router.push('/')"
+        class="cursor-pointer"
+        icon="icon-48x48"
+      ></base-logo>
+      <network-select></network-select>
+      <base-icon class="cursor-pointer" icon="/swap-btn/settings"></base-icon>
+    </base-wrapper>
+  </div>
+  <div class="nav">
+    <ul class="nav__panel">
+      <router-link v-slot="{ isExactActive }" to="/">
+        <li
+          class="nav__panel--item"
+          :class="[
+            isExactActive ? 'text-word-3' : 'text-word-5 hover:text-blue-500'
+          ]"
+        >
+          Swap
+          <hr
+            class="nav__panel--link__line"
+            :class="{ hidden: !isExactActive }"
+          />
+        </li>
+      </router-link>
+      <router-link v-slot="{ isExactActive }" to="/welcome">
+        <li
+          class="nav__panel--item"
+          :class="[
+            isExactActive ? 'text-word-3' : 'text-word-5 hover:text-blue-500'
+          ]"
+        >
+          Wallet
+          <hr
+            class="nav__panel--link__line"
+            :class="{ hidden: !isExactActive }"
+          />
+        </li>
+      </router-link>
+    </ul>
   </div>
   <router-view />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import NetworkSelect from './components/common/NetworkSelect.vue'
 
 export default defineComponent({
+  components: { NetworkSelect },
   setup() {
     console.log('Hello, 1inch!🦄')
   }
@@ -36,7 +77,6 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #617ba3;
   overflow: scroll;
   padding: 10px;
@@ -48,17 +88,13 @@ body {
   @apply font-main bg-back-9;
   box-shadow: 0px 5px 15px #27262633;
 }
-
-#nav {
-  padding: 10px;
-
-  a {
-    font-weight: bold;
-    color: #617ba3;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.nav__panel {
+  @apply flex p-5;
+  &--item {
+    @apply first:mr-2.5;
+  }
+  &--link__line {
+    @apply border-none text-blue-400 bg-blue-400 h-0.5;
   }
 }
 </style>
