@@ -83,26 +83,27 @@ export default {
     ListboxOption
   },
   created() {
-    this.$store.commit('settings/setselectedNetwork', this.selectedNetwork.id)
+    this.$store.commit('settings/setSelectedNetwork', this.selectedNetwork.id)
   },
   data() {
     return {
       networks: [
-        { name: 'Ethereum', icon: 'eth', id: '1' },
-        { name: 'BSC Mainnet', icon: 'bsc', id: '56' },
-        { name: 'Polygon Network', icon: 'polygon', id: '137' }
+        { name: 'Ethereum', icon: 'eth', id: 1 },
+        { name: 'BSC Mainnet', icon: 'bsc', id: 56 },
+        { name: 'Polygon Network', icon: 'polygon', id: 137 }
       ],
-      selectedNetwork: { name: 'Ethereum', icon: 'eth', id: '1' }
+      selectedNetwork: { name: 'Ethereum', icon: 'eth', id: 1 }
     }
   },
   methods: {
     select(network) {
       this.selectedNetwork = network
-      this.$store.commit('settings/setselectedNetwork', this.selectedNetwork.id)
+      this.$store.commit('settings/setSelectedNetwork', this.selectedNetwork.id)
+      this.$store.dispatch('settings/fetchTokens')
     },
     computed: {
       ...mapGetters({
-        selectedNetwork: 'settings/selectedNetwork'
+        selectedNetwork: 'settings/setSelectedNetwork'
       })
     }
   }

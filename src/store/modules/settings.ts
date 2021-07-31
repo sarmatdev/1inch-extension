@@ -1,36 +1,40 @@
-import { getTokens } from '../../api/tokens.api'
+import { getTokens } from '@/api/tokens.api'
+
+interface IToken {
+  address: string
+  decimals: number
+  logoURI: string
+  name: string
+  symbol: string
+}
 
 export interface SettingsState {
-  auth: true
+  selectedNetwork: number
+  tokens: Array<IToken>
 }
 
-const state = {
-  auth: [],
-  selectedNetwork: '',
-  tokens: {}
+const state: SettingsState = {
+  selectedNetwork: 1,
+  tokens: []
 }
 const mutations = {
-  setselectedNetwork(state, paylod) {
-    state.selectedNetwork = paylod
-    console.log('api send')
+  setSelectedNetwork(state: SettingsState, id: number) {
+    state.selectedNetwork = id
   },
-  setTokens(state, tokens) {
+  setTokens(state: SettingsState, tokens: Array<IToken>) {
     state.tokens = tokens
   }
 }
 const actions = {
   async fetchTokens({ commit }) {
-    try {
-      const response = await getTokens()
-      commit('setTokens', response.data.result)
-    } catch (error) {
-      console.log(error)
-    }
+    const tokens = await getTokens()
+    commit('setTokens', tokens.data.tokens)
+    console.log('tokens', tokens.data.tokens)
   }
 }
 const getters = {
-  selectedNetwork: (state) => state.selectedNetwork,
-  tokens: (state) => state.tokens
+  selectedNetwork: (s: SettingsState) => s.selectedNetwork,
+  tokens: (s: SettingsState) => s.tokens
 }
 
 export default {
