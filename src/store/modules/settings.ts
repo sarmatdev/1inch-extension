@@ -1,13 +1,26 @@
+import { getTokens } from "../../api/tokens.api";
+
 export interface SettingsState {
   auth: true
 }
 
 const state = {
-  auth: []
+  auth: [],
+  selectedNetwork: "",
+  
 }
-const mutations = {}
-const actions = {}
-const getters = {}
+const mutations = {
+  setselectedNetwork(state, paylod) {
+  state.selectedNetwork = paylod
+  console.log('api send')
+}
+}
+const actions = {
+  
+}
+const getters = {
+  selectedNetwork: (state) => state.selectedNetwork
+}
 
 export default {
   namespaced: true,
