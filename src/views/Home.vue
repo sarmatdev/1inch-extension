@@ -1,19 +1,31 @@
 <template>
-  <div class="container text-center">
-    <img alt="Vue logo" src="../assets/images/logo.png" />
-    <h1 class="text-red-500">App started! To The Moon🚀🌑</h1>
-    <token-input description="You Pay"></token-input>
+  <div class="swap__page--container">
+    <token-swap-handler
+      class="swap__page--container--item"
+      tokenPassMode="input"
+    ></token-swap-handler>
+    <token-swap-handler
+      class="swap__page--container--item"
+      tokenPassMode="output"
+    ></token-swap-handler>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import TokenInput from '../components/common/swap/TokenInput.vue'
+import TokenSwapHandler from '../components/common/TokenSwapHandler.vue'
 
 export default defineComponent({
   name: 'Home',
-  components: { TokenInput }
+  components: { TokenSwapHandler }
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.swap__page--container {
+  @apply h-full flex flex-col;
+  &--item {
+    @apply first:my-10;
+  }
+}
+</style>
