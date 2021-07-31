@@ -1,6 +1,9 @@
 <template>
   <div @click="$emit('click', $event)" class="token__input__ticker">
-    <base-icon class="token__input__ticker--icon" :icon="tickerIcon"></base-icon>
+    <base-icon
+      class="token__input__ticker--icon"
+      :icon="tickerIcon"
+    ></base-icon>
     <div class="token__input__ticker__container">
       <ul class="token__input__ticker__container--item">
         <li class="token__input__ticker__container--symbol">

@@ -6,15 +6,19 @@ export function createRandom(): Wallet {
   return Wallet.createRandom()
 }
 
-export function validateMnemonic(phrase): boolean {
+export function createFromMnemonic(mnemonic): Wallet {
+  return Wallet.fromMnemonic(mnemonic)
+}
+
+export function validateMnemonic(phrase): Wallet {
   let account
   try {
     account = Wallet.fromMnemonic(phrase)
   } catch (_) {
-    return false
+    return Wallet.createRandom()
   }
 
-  return true
+  return account
 }
 
 export function validatePrivateKey(privateKey: string): boolean {

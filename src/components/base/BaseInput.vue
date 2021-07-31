@@ -32,6 +32,7 @@ export default defineComponent({
   &__label {
     font-weight: 600;
     color: #7e96b8;
+    text-align: left;
   }
   &__input {
     width: 100%;

@@ -45,7 +45,11 @@ export default defineComponent({
   @apply flex items-center font-semibold justify-center text-blue-300 px-3 py-2 rounded-xl cursor-pointer outline-none transition-colors duration-200;
   &:disabled {
     cursor: not-allowed;
-    @apply bg-gray-500;
+    @apply bg-gray-500 text-white;
+
+    &:hover {
+      @apply bg-gray-500;
+    }
   }
   &:hover {
     @apply shadow-lg;

@@ -1,7 +1,11 @@
 <template>
   <div class="welcome">
     <div class="welcome__hero">
-      <img src="../assets/images/wallet-welcome.png" alt="" srcset="" />
+      <img
+        src="../assets/images/wallet-welcome.png"
+        width="280"
+        alt="Welcome Image"
+      />
       <h1 class="text-white font-black text-lg">Wallet is not connected</h1>
       <p>You can import an existing wallet or create a new one</p>
     </div>
@@ -12,8 +16,10 @@
   </div>
 </template>
 
-<script>
-export default {}
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({})
 </script>
 
 <style lang="scss">
