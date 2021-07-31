@@ -25,7 +25,8 @@ const actions = {
   }
 }
 const getters = {
-  isAuth: (s): boolean => s.isAuth
+  isAuth: (s): boolean => s.isAuth,
+  hasPassword: (s): boolean => !!s.password
 }
 
 export default {

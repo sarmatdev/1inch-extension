@@ -21,8 +21,11 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    const step = ref(1)
 
+    const hasPassword = computed(() => {
+      return store.getters['auth/hasPassword']
+    })
+    const step = ref(hasPassword.value ? 2 : 1)
     const currentStep = computed(() => {
       switch (step.value) {
         case 1:
@@ -49,7 +52,8 @@ export default defineComponent({
       agree,
       nextStep,
       mnemonicForConfirm,
-      currentStep
+      currentStep,
+      hasPassword
     }
   }
 })
