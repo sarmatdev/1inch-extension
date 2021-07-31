@@ -4,36 +4,49 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import WordList from '@/components/common/WordList.vue'
+import CreatePassword from '@/components/common/CreateWallet/CreatePassword.vue'
 import CreateMnemonic from '@/components/common/CreateWallet/CreateMnemonic.vue'
 import ConfirmMnemonic from '@/components/common/CreateWallet/ConfirmMnemonic.vue'
 
 export default defineComponent({
   name: 'Create wallet',
+  emits: ['nextStep'],
   components: {
     WordList,
     ConfirmMnemonic,
-    CreateMnemonic
+    CreateMnemonic,
+    CreatePassword
   },
   setup() {
+    const store = useStore()
     const step = ref(1)
 
-    const currentStep = computed(() =>
-      step.value === 1 ? 'CreateMnemonic' : 'ConfirmMnemonic'
-    )
+    const currentStep = computed(() => {
+      switch (step.value) {
+        case 1:
+          return 'CreatePassword'
+        case 2:
+          return 'CreateMnemonic'
+        case 3:
+          return 'ConfirmMnemonic'
+        default:
+          return 'CreateMnemonic'
+      }
+    })
 
     const agree = ref(false)
-    const walletName = ref('')
     const mnemonicForConfirm = ref('')
 
-    function nextStep(value) {
+    function nextStep(value: number): void {
       step.value = value
     }
 
     return {
+      store,
       step,
       agree,
-      walletName,
       nextStep,
       mnemonicForConfirm,
       currentStep

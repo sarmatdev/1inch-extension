@@ -38,13 +38,14 @@ export default defineComponent({
   components: {
     WordList
   },
+  emits: ['nextStep'],
   setup(_, { emit }) {
     const wallet = createRandom()
     const mnemonic = wallet.mnemonic.phrase.split(' ')
     const agree = ref(false)
 
     function continueToConfirm() {
-      emit('nextStep', 2)
+      emit('nextStep', 3)
     }
 
     return {

@@ -11,7 +11,6 @@
       label="You must write the phrase in the correct order"
       v-model.trim="mnemonicForConfirm"
     ></base-textarea>
-    {{ walletFromMnemonic }}
     <base-button
       @click="saveWallet"
       :disabled="!mnemonicConfirmed"
@@ -31,7 +30,6 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const router = useRouter()
-    const walletName = ref('')
     const mnemonicForConfirm = ref(
       'life equip reform inch author human lizard spray huge capable volume tenant'
     )
@@ -40,9 +38,10 @@ export default defineComponent({
       return validateMnemonic(mnemonicForConfirm)
     })
 
-    // const walletFromMnemonic = computed(() => {
-    //   return createFromMnemonic(mnemonicForConfirm.value)
-    // })
+    const nextWalletName = computed(() => {
+      return `Wallet ${store.getters['wallets/accountsNum']}`
+    })
+    const walletName = ref(nextWalletName.value)
 
     function saveWallet() {
       store.dispatch('wallets/storeWallet', {
@@ -64,7 +63,6 @@ export default defineComponent({
     }
   }
 })
-// life equip reform inch author human lizard spray huge capable volume tenant
 </script>
 
 <style></style>
