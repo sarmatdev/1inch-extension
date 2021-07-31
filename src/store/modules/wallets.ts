@@ -1,5 +1,6 @@
-/* eslint-disable no-empty-pattern */
 import { setStorageItem } from '@/services/storage'
+import { encryptString } from '@/services/crypto'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Account {
   name: string
@@ -7,10 +8,12 @@ interface Account {
 }
 
 export interface WalletsState {
+  address: ''
   accounts: Array<Account>
 }
 
 const state = {
+  address: '',
   accounts: []
 }
 const mutations = {
@@ -20,13 +23,20 @@ const mutations = {
 }
 const actions = {
   storeWallet({ commit }, wallet) {
-    console.log('wallet', wallet)
-    commit('setWallet', wallet)
-    setStorageItem(wallet.name, wallet)
+    const salt = uuidv4().replace(/-/g, '')
+    const encryptedWallet = {
+      ...wallet,
+      privateKey: encryptString(wallet.privateKey, salt),
+      salt
+    }
+
+    commit('setWallet', encryptedWallet)
+    setStorageItem(wallet.name, encryptedWallet)
   }
 }
 const getters = {
-  accounts: (s) => s.accounts
+  accounts: (s: WalletsState) => s.accounts,
+  accountsNum: (s: WalletsState) => s.accounts.length
 }
 
 export default {
