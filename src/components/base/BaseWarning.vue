@@ -1,5 +1,13 @@
 <template>
-  <div class="base-warning">{{ text }}</div>
+  <div class="base__warning">
+    <div :class="`base__warning--${position}__container`">
+      <base-icon
+        :class="`base__warning--${position}__icon`"
+        icon="/token-input/warning"
+      ></base-icon>
+      <span><slot /></span>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -7,15 +15,33 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'BaseWarning',
   props: {
-    text: String
+    position: {
+      type: String,
+      default: 'vertically',
+      validator: (value: string) => ['vertically', 'horizontal'].includes(value)
+    }
   }
 })
 </script>
 
 <style lang="scss">
-.base-warning {
-  padding: 10px 20px;
-  background-color: rgb(231, 208, 117);
-  border-radius: 10px;
+.base__warning {
+  &--vertically {
+    &__container {
+      @apply flex flex-col justify-center text-center;
+    }
+    &__icon {
+      @apply w-8 h-8 mx-auto;
+    }
+  }
+  &--horizontal {
+    &__container {
+      @apply flex justify-around items-center;
+    }
+    &__icon {
+      @apply w-8 h-8 my-auto;
+    }
+  }
+  @apply bg-red-900 bg-opacity-20 text-red-700 rounded-2xl p-2.5 text-sm font-light;
 }
 </style>

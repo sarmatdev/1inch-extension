@@ -1,12 +1,16 @@
 <template>
-  <div class="input">
-    <base-icon icon="search" class="input--icon"></base-icon>
+  <div class="token__input__search">
+    <base-icon
+      v-if="icon"
+      :icon="searchIcon"
+      class="token__input__search--icon"
+    ></base-icon>
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       :placeholder="placeholder"
       :type="type"
-      class="input--container"
+      class="token__input__search--container"
     />
   </div>
 </template>
@@ -15,17 +19,18 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'InputForm',
+  name: 'SearchInputForm',
   props: {
     modelValue: String,
     placeholder: String,
-    type: String
+    type: String,
+    searchIcon: String
   }
 })
 </script>
 
-<style lang="scss">
-.input {
+<style lang="scss" scoped>
+.token__input__search {
   @apply flex
       items-center
       p-1.5
@@ -33,7 +38,7 @@ export default defineComponent({
       rounded-xl
       bg-black;
   &--container {
-    @apply bg-black h-full w-full outline-none text-white ml-2.5;
+    @apply bg-black h-full w-full outline-none text-word-3 ml-2.5;
   }
 }
 </style>

@@ -1,17 +1,23 @@
 <template>
-  <h1 class="title"><slot /></h1>
+  <h1 class="base__title"><slot /></h1>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'BaseTitle'
+  name: 'BaseTitle',
+  props: {
+    font: {
+      type: String,
+      default: 'medium'
+    }
+  }
 })
 </script>
 
 <style>
-.title {
-  @apply text-sm text-white text-left;
+.base__title {
+  @apply text-left font-main font-medium;
 }
 </style>

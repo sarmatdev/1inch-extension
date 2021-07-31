@@ -1,48 +1,59 @@
 <template>
-  <h1>Create Wallet</h1>
-  <section class="mnemonic">
-    <h1 class="text-white font-black text-lg">Your mnemonic phrase</h1>
-    <p>
-      Write down or copy this phrase in the correct order and keep it in a safe
-      place.
-    </p>
-    <base-warning
-      class="mt-1"
-      text="Never give your recovery phrase to third parties, keep it in a safe place!"
-    ></base-warning>
-    <WordList :words="mnemonic" />
-  </section>
-  <section class="agreement">
-    <div>
-      <input type="checkbox" id="creation-agreement" v-model="agree" />
-      <label for="creation-agreement"
-        >I understand that if you lose your recovery phrase, you will not be
-        able to access my funds</label
-      >
-    </div>
-    <base-button :disabled="!agree" class="w-full">Continue</base-button>
-  </section>
+  <component @nextStep="nextStep" :is="currentStep"> </component>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { ethers } from 'ethers'
+import { computed, defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import WordList from '@/components/common/WordList.vue'
+import CreatePassword from '@/components/common/CreateWallet/CreatePassword.vue'
+import CreateMnemonic from '@/components/common/CreateWallet/CreateMnemonic.vue'
+import ConfirmMnemonic from '@/components/common/CreateWallet/ConfirmMnemonic.vue'
 
 export default defineComponent({
   name: 'Create wallet',
+  emits: ['nextStep'],
   components: {
-    WordList
+    WordList,
+    ConfirmMnemonic,
+    CreateMnemonic,
+    CreatePassword
   },
   setup() {
-    const phrase = ethers.Wallet.createRandom().mnemonic
-    const mnemonic = phrase.phrase.split(' ')
+    const store = useStore()
+
+    const hasPassword = computed(() => {
+      return store.getters['auth/hasPassword']
+    })
+    const step = ref(hasPassword.value ? 2 : 1)
+    const currentStep = computed(() => {
+      switch (step.value) {
+        case 1:
+          return 'CreatePassword'
+        case 2:
+          return 'CreateMnemonic'
+        case 3:
+          return 'ConfirmMnemonic'
+        default:
+          return 'CreateMnemonic'
+      }
+    })
 
     const agree = ref(false)
+    const mnemonicForConfirm = ref('')
+
+    function nextStep(value: number): void {
+      step.value = value
+    }
 
     return {
-      mnemonic,
-      agree
+      store,
+      step,
+      agree,
+      nextStep,
+      mnemonicForConfirm,
+      currentStep,
+      hasPassword
     }
   }
 })
