@@ -6,7 +6,7 @@
         icon="/token-input/add"
       ></base-icon>
       <base-title class="token__input--token__button--text">
-          <slot />
+        <slot />
       </base-title>
     </base-wrapper>
   </base-button>
