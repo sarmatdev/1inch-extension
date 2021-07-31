@@ -1,4 +1,4 @@
-import { getTokens } from "../../api/tokens.api";
+import { getTokens } from '../../api/tokens.api'
 
 export interface SettingsState {
   auth: true
@@ -6,25 +6,25 @@ export interface SettingsState {
 
 const state = {
   auth: [],
-  selectedNetwork: "",
+  selectedNetwork: '',
   tokens: {}
 }
 const mutations = {
   setselectedNetwork(state, paylod) {
-  state.selectedNetwork = paylod
-  console.log('api send')
-},
-setTokens(state, tokens) {
-  state.tokens = tokens;
-}
+    state.selectedNetwork = paylod
+    console.log('api send')
+  },
+  setTokens(state, tokens) {
+    state.tokens = tokens
+  }
 }
 const actions = {
   async fetchTokens({ commit }) {
     try {
-      const response = await getTokens();
-      commit("setTokens", response.data.result);
+      const response = await getTokens()
+      commit('setTokens', response.data.result)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }
