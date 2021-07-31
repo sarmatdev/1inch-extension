@@ -12,8 +12,6 @@
         text="Never give your recovery phrase to third parties, keep it in a safe place!"
       ></base-warning>
       <WordList :words="mnemonic" />
-      {{ mnemonic }}
-      <base-icon class="h-6 w-6" icon="copy"></base-icon>
     </section>
     <section class="create-wallet__agreement">
       <input type="checkbox" id="creation-agreement" v-model="agree" />
