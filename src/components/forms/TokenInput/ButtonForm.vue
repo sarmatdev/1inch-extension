@@ -1,9 +1,6 @@
 <template>
   <div @click="$emit('click', $event)" class="token__input__button">
-    <base-token-logo
-      :icon="buttonIcon"
-      class="token__input__button--icon"
-    >
+    <base-token-logo :icon="buttonIcon" class="token__input__button--icon">
     </base-token-logo>
     <base-title><slot /></base-title>
     <base-icon
