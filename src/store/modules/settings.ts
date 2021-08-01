@@ -34,7 +34,7 @@ const actions = {
 }
 const getters = {
   selectedNetwork: (s: SettingsState) => s.selectedNetwork,
-  tokens: (s: SettingsState) => s.tokens
+  tokens: (s: SettingsState) => Object.values(s.tokens)
 }
 
 export default {

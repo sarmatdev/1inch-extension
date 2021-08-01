@@ -23,16 +23,16 @@
         <div class="token__input__header">
           <template class="token__input__header--item">
             <label-form class="token__input__header--item--name">
-              {{ selectedTicker.name }}
+              {{ selectedToken.name }}
             </label-form>
             <label-form class="token__input__header--item--price">
-              ~${{ selectedTicker.price }}
+              ~${{ selectedToken.decimals }}
             </label-form>
           </template>
           <template class="token__input__header--item">
             <MenuButton>
-              <button-form :buttonIcon="selectedTicker.icon">
-                {{ selectedTicker.symbol }}
+              <button-form :buttonIcon="selectedToken.logoURI">
+                {{ selectedToken.symbol }}
               </button-form>
             </MenuButton>
             <amount-pass-form
@@ -51,37 +51,37 @@
         </div>
         <MenuItems>
           <div
-            :class="{ 'overflow-y-scroll h-64': filteredTickers().length > 3 }"
+            :class="{ 'overflow-y-scroll h-64': filteredTokens().length > 3 }"
             class="token__input__items"
           >
             <div class="token__input__items--container">
               <template v-if="!modalShowStatus">
                 <MenuItem disabled>
                   <search-input-form
-                    v-model="ticker"
+                    v-model="tokenForSearch"
                     searchIcon="/input-btn/search"
                     placeholder='Try "Dai"'
                   ></search-input-form>
                 </MenuItem>
                 <MenuItem
-                  v-for="ticker in filteredTickers()"
-                  :key="ticker.index"
+                  v-for="token in filteredTokens()"
+                  :key="token.address"
                 >
                   <ticker-form
-                    @click="select(ticker)"
-                    :tickerIcon="ticker.icon"
+                    @click="select(token)"
+                    :tickerIcon="token.logoURI"
                   >
-                    <template v-slot:name> {{ ticker.name }} </template>
-                    <template v-slot:symbol> {{ ticker.symbol }} </template>
-                    <template v-slot:token> {{ ticker.token }} </template>
-                    <template v-slot:price> =${{ ticker.price }} </template>
+                    <template v-slot:name> {{ token.name }} </template>
+                    <template v-slot:symbol> {{ token.symbol }} </template>
+                    <template v-slot:token> test </template>
+                    <template v-slot:price> =${{ token.decimals }} </template>
                   </ticker-form>
                 </MenuItem>
                 <MenuItem
                   disabled
                   class="token__input--unfound__field"
                   as="div"
-                  v-if="!filteredTickers().length"
+                  v-if="!filteredTokens().length"
                 >
                   <unfound-form @ModalOpenEvent="openModal()"></unfound-form>
                 </MenuItem>
@@ -105,7 +105,7 @@ import LabelForm from '../forms/TokenInput/LabelForm.vue'
 import DescriptionForm from '../forms/TokenInput/DescriptionForm.vue'
 import UnfoundForm from '../forms/TokenInput/UnfoundForm.vue'
 import CustomTokenInputForm from '../forms/TokenInput/CustomTokenInputForm.vue'
-import { getTokens } from '../../api/tokens.api'
+import { mapGetters, mapActions } from 'vuex'
 
 export default defineComponent({
   name: 'TokenSwapHandler',
@@ -123,122 +123,25 @@ export default defineComponent({
     UnfoundForm,
     CustomTokenInputForm
   },
-
+  created() {
+    this.fetchTokens()
+  },
   data() {
     return {
       modalShowStatus: false,
-      token: '',
-      ticker: '',
+      tokenForSearch: '',
+      selectedToken: {
+        symbol: 'CTSI',
+        name: 'Cartesi Token',
+        decimals: 18,
+        address: '0x491604c0fdf08347dd1fa4ee062a822a5dd06b5d',
+        logoURI:
+          'https://tokens.1inch.exchange/0x491604c0fdf08347dd1fa4ee062a822a5dd06b5d.png'
+      },
       //=============== Testing data =================
       secondToken: '123',
-      wallet: '1.0091',
-      selectedTicker: {
-        index: 0,
-        name: 'Etherium',
-        symbol: 'ETC',
-        token: '00.2',
-        price: '33345',
-        icon: '/network-select/eth'
-      },
-      tickers: [
-        {
-          index: 0,
-          name: 'Etherium',
-          symbol: 'ETC',
-          token: '00.2',
-          price: '33345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 1,
-          name: 'Etherium',
-          symbol: 'ETC',
-          token: '00.2',
-          price: '33345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 2,
-          name: 'Bitcoin',
-          symbol: 'BTC',
-          token: '00.2',
-          price: '33345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 3,
-          name: 'DogeCoin',
-          symbol: 'DOGE',
-          token: '1.2',
-          price: '12.23',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 4,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 5,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 6,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 7,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 8,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 9,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 10,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        },
-        {
-          index: 11,
-          name: 'DAI StaibleCoin',
-          symbol: 'DAI',
-          token: '23.22',
-          price: '3.345',
-          icon: '/network-select/eth'
-        }
-      ]
-      //=========================================
+      wallet: '1.0091'
+      //==============================================
     }
   },
   props: {
@@ -249,14 +152,17 @@ export default defineComponent({
     }
   },
   methods: {
-    select(ticker) {
-      this.selectedTicker = ticker
+    ...mapActions({
+      fetchTokens: 'settings/fetchTokens'
+    }),
+    select(token) {
+      this.selectedToken = token
     },
-    filteredTickers() {
-      return this.tickers.filter(
+    filteredTokens() {
+      return this.tokens.filter(
         (el) =>
-          el.name.toUpperCase().includes(this.ticker.toUpperCase()) ||
-          el.symbol.toUpperCase().includes(this.ticker.toUpperCase())
+          el.name.includes(this.tokenForSearch) ||
+          el.symbol.includes(this.tokenForSearch)
       )
     },
     closeModal() {
@@ -265,6 +171,11 @@ export default defineComponent({
     openModal() {
       this.modalShowStatus = true
     }
+  },
+  computed: {
+    ...mapGetters({
+      tokens: 'settings/tokens'
+    })
   }
 })
 </script>

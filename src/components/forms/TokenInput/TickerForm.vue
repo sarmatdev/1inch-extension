@@ -1,9 +1,9 @@
 <template>
   <div @click="$emit('click', $event)" class="token__input__ticker">
-    <base-icon
+    <base-token-logo
       class="token__input__ticker--icon"
       :icon="tickerIcon"
-    ></base-icon>
+    ></base-token-logo>
     <div class="token__input__ticker__container">
       <ul class="token__input__ticker__container--item">
         <li class="token__input__ticker__container--symbol">
@@ -48,7 +48,7 @@ export default defineComponent({
     @apply bg-gray-700 transition;
   }
   &--icon {
-    @apply w-10 h-10 mr-2.5;
+    @apply mr-2.5;
   }
   &__container {
     @apply flex items-center justify-between w-full;
