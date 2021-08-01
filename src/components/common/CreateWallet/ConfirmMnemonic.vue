@@ -6,7 +6,7 @@
       </h1>
       <base-input
         v-model="walletName"
-        class="create__wallet--confirm__mnemonic__button"
+        class="create__wallet--confirm__mnemonic__input"
         placeholder="Name"
         label="Set the wallet name"
       ></base-input>
@@ -14,15 +14,9 @@
         label="You must write the phrase in the correct order"
         v-model.trim="mnemonicForConfirm"
       ></base-textarea>
-      <ul class="grid grid-cols-3 gap-2">
+      <ul class="create__wallet--confirm__mnemonic__list">
         <li
-          class="
-            border border-word-4
-            text-word-4
-            border-solid
-            rounded-xl
-            cursor-pointer
-          "
+          class="create__wallet--confirm__mnemonic__list--item"
           v-for="(mnemonicItem, idx) in mnemonicForConfirm
             .split(' ')
             .sort(() => Math.round(Math.random() * 100) - 50)"
@@ -35,7 +29,7 @@
       <base-button
         @click="saveWallet"
         :disabled="!mnemonicConfirmed"
-        class="w-full text-word-3"
+        class="create__wallet--confirm__mnemonic__button"
         >Create Wallet</base-button
       >
     </section>
@@ -94,8 +88,17 @@ export default defineComponent({
     &__header {
       @apply text-2xl text-word-3;
     }
-    &__button {
+    &__input {
       @apply w-full;
+    }
+    &__list{
+      @apply grid grid-cols-3 gap-2;
+      &--item{
+        @apply border border-word-4 text-word-4 border-solid rounded-xl cursor-pointer;
+      }
+    }
+    &__button{
+      @apply w-full text-word-3;
     }
   }
 }

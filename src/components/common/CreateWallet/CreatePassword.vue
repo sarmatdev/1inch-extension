@@ -1,19 +1,23 @@
 <template>
-  <h1>Create Password</h1>
-  <base-input
-    v-model="password"
-    label="Password"
-    placeholder="Min. 8 characters"
-  ></base-input>
-  <base-input
-    v-model="passwordConfirm"
-    label="Password confirm"
-    placeholder="Min. 8 characters"
-  ></base-input>
+  <section class="create__password">
+    <h1 class="create__password__header">Create Password</h1>
+    <base-input
+      class="create__password__input"
+      v-model="password"
+      label="Password"
+      placeholder="Min. 8 characters"
+    ></base-input>
+    <base-input
+      class="create__password__input"
+      v-model="passwordConfirm"
+      label="Password confirm"
+      placeholder="Min. 8 characters"
+    ></base-input>
 
-  <base-button @click="nextStep" class="mt-5 w-full"
-    >Create Password</base-button
-  >
+    <base-button @click="nextStep" class="create__password__button"
+      >Create Password</base-button
+    >
+  </section>
 </template>
 
 <script lang="ts">
@@ -48,4 +52,12 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.create__password {
+  @apply text-center grid grid-cols-1 gap-y-6;
+  &__input,
+  &__button {
+    @apply w-full;
+  }
+}
+</style>
