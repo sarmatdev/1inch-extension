@@ -91,13 +91,13 @@ export default defineComponent({
     &__input {
       @apply w-full;
     }
-    &__list{
+    &__list {
       @apply grid grid-cols-3 gap-2;
-      &--item{
+      &--item {
         @apply border border-word-4 text-word-4 border-solid rounded-xl cursor-pointer;
       }
     }
-    &__button{
+    &__button {
       @apply w-full text-word-3;
     }
   }

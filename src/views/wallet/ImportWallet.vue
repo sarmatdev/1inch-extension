@@ -1,9 +1,15 @@
 <template>
   <section class="import__wallet">
-    <h1 class="import__wallet__header ">Import wallet</h1>
-    <base-input v-model="name" label="Wallet Name" class="import__wallet__input"></base-input>
+    <h1 class="import__wallet__header">Import wallet</h1>
+    <base-input
+      v-model="name"
+      label="Wallet Name"
+      class="import__wallet__input"
+    ></base-input>
     <base-textarea label="Private key" v-model="source"></base-textarea>
-    <base-button color="blue__bright" class="import__wallet__button">Import</base-button>
+    <base-button color="blue__bright" class="import__wallet__button"
+      >Import</base-button
+    >
   </section>
   {{ isValidSource }}
 </template>
@@ -30,16 +36,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.import__wallet{
+.import__wallet {
   @apply grid grid-cols-1 gap-y-8;
-  &__header{
+  &__header {
     @apply text-2xl text-word-3 text-center font-bold;
   }
   &__input,
-  &__button{
+  &__button {
     @apply w-full;
   }
-
 }
-
 </style>
