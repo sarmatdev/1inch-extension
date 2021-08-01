@@ -105,6 +105,7 @@ import LabelForm from '../forms/TokenInput/LabelForm.vue'
 import DescriptionForm from '../forms/TokenInput/DescriptionForm.vue'
 import UnfoundForm from '../forms/TokenInput/UnfoundForm.vue'
 import CustomTokenInputForm from '../forms/TokenInput/CustomTokenInputForm.vue'
+import { getTokens } from '../../api/tokens.api'
 
 export default defineComponent({
   name: 'TokenSwapHandler',

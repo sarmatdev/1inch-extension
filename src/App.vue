@@ -47,10 +47,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import NetworkSelect from './components/common/NetworkSelect.vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: { NetworkSelect },
   setup() {
+    const store = useStore()
+    store.dispatch('settings/fetchTokens')
     console.log('Hello, 1inch!🦄')
   }
 })

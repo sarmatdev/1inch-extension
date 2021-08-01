@@ -6,7 +6,7 @@
         :class="[
           {
             'network__select__button--eth__active':
-              selectedNetwork.name === 'Etherium'
+              selectedNetwork.name === 'Ethereum'
           },
           {
             'network__select__button--bscm__active':
@@ -20,7 +20,7 @@
       >
         <base-icon
           class="network__select--network__icon"
-          :icon="`/network-select${selectedNetwork.icon}-selected`"
+          :icon="`/network-select/${selectedNetwork.icon}-selected`"
         ></base-icon>
         <base-title>{{ selectedNetwork.name }}</base-title>
         <base-icon
@@ -41,6 +41,7 @@
             v-for="network in networks"
             :key="network.name"
             :value="network"
+            @click="select(network)"
             as="template"
           >
             <li
@@ -51,7 +52,7 @@
             >
               <base-icon
                 class="network__select--network__icon"
-                :icon="`/network-select${network.icon}`"
+                :icon="`/network-select/${network.icon}`"
               ></base-icon>
               <base-title class="network__select__options__item--name">{{
                 network.name
@@ -65,7 +66,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { mapGetters } from 'vuex'
 import {
   Listbox,
   ListboxButton,
@@ -74,24 +75,36 @@ import {
 } from '@headlessui/vue'
 
 export default {
+  name: 'NetworkSelect',
   components: {
     Listbox,
     ListboxButton,
     ListboxOptions,
     ListboxOption
   },
-
-  setup() {
-    const networks = [
-      { name: 'Etherium', icon: '/eth' },
-      { name: 'BSC Mainnet', icon: '/bsc' },
-      { name: 'Polygon Network', icon: '/polygon' }
-    ]
-    const selectedNetwork = ref(networks[0])
-
+  created() {
+    this.$store.commit('settings/setSelectedNetwork', this.selectedNetwork.id)
+  },
+  data() {
     return {
-      networks,
-      selectedNetwork
+      networks: [
+        { name: 'Ethereum', icon: 'eth', id: 1 },
+        { name: 'BSC Mainnet', icon: 'bsc', id: 56 },
+        { name: 'Polygon Network', icon: 'polygon', id: 137 }
+      ],
+      selectedNetwork: { name: 'Ethereum', icon: 'eth', id: 1 }
+    }
+  },
+  methods: {
+    select(network) {
+      this.selectedNetwork = network
+      this.$store.commit('settings/setSelectedNetwork', this.selectedNetwork.id)
+      this.$store.dispatch('settings/fetchTokens')
+    },
+    computed: {
+      ...mapGetters({
+        selectedNetwork: 'settings/setSelectedNetwork'
+      })
     }
   }
 }
@@ -122,7 +135,7 @@ export default {
   &__options {
     @apply absolute w-full py-1 mt-1 focus:outline-none rounded-2xl bg-gray-700;
     &__item {
-      @apply flex items-center cursor-default select-none my-2 px-5 py-2;
+      @apply flex items-center cursor-pointer select-none my-2 px-5 py-2;
       &--name {
         @apply ml-2.5 text-left;
       }
