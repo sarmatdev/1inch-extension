@@ -1,23 +1,45 @@
 <template>
-  <h1>Confirm mnemonic</h1>
-  <section>
-    <base-input
-      v-model="walletName"
-      class="w-full mb-5"
-      placeholder="Name"
-      label="Set the wallet name"
-    ></base-input>
-    <base-textarea
-      label="You must write the phrase in the correct order"
-      v-model.trim="mnemonicForConfirm"
-    ></base-textarea>
-    <base-button
-      @click="saveWallet"
-      :disabled="!mnemonicConfirmed"
-      class="w-full"
-      >Create Wallet</base-button
-    >
-  </section>
+  <main class="create__wallet">
+    <section class="create__wallet--confirm__mnemonic">
+      <h1 class="create__wallet--confirm__mnemonic__header">
+        Confirm mnemonic
+      </h1>
+      <base-input
+        v-model="walletName"
+        class="create__wallet--confirm__mnemonic__button"
+        placeholder="Name"
+        label="Set the wallet name"
+      ></base-input>
+      <base-textarea
+        label="You must write the phrase in the correct order"
+        v-model.trim="mnemonicForConfirm"
+      ></base-textarea>
+      <ul class="grid grid-cols-3 gap-2">
+        <li
+          class="
+            border border-word-4
+            text-word-4
+            border-solid
+            rounded-xl
+            cursor-pointer
+          "
+          v-for="(mnemonicItem, idx) in mnemonicForConfirm
+            .split(' ')
+            .sort(() => Math.round(Math.random() * 100) - 50)"
+          :key="idx"
+          @click="mnemonicForConfirm.split(' ').push(mnemonicItem).join(' ')"
+        >
+          {{ mnemonicItem }}
+        </li>
+      </ul>
+      <base-button
+        @click="saveWallet"
+        :disabled="!mnemonicConfirmed"
+        class="w-full text-word-3"
+        >Create Wallet</base-button
+      >
+    </section>
+  </main>
 </template>
 
 <script lang="ts">
@@ -65,4 +87,16 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.create__wallet {
+  &--confirm__mnemonic {
+    @apply text-center grid grid-cols-1 gap-y-3;
+    &__header {
+      @apply text-2xl text-word-3;
+    }
+    &__button {
+      @apply w-full;
+    }
+  }
+}
+</style>

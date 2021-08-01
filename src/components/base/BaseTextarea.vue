@@ -26,27 +26,14 @@ export default defineComponent({
 
 <style lang="scss">
 .base-textarea {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+  @apply flex flex-col items-start;
 
   &__label {
-    font-weight: 600;
-    color: #7e96b8;
-    text-align: left;
+    @apply text-word-5 text-left font-medium;
   }
 
   &__field {
-    background-color: #06070a;
-    border: 1px solid #37445a;
-    color: #fff;
-    padding: 10px 20px;
-    outline: none;
-    border-radius: 12px;
-    font-weight: 500;
-    width: 100%;
-    min-height: 200px;
-    resize: none;
+    @apply w-full bg-black border border-word-4 border-solid text-word-3 px-5 py-2.5 outline-none rounded-2xl font-medium resize-none h-24;
   }
 }
 </style>

@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <h1>Import wallet</h1>
-  </div>
-  <section>
+  <section class="grid grid-cols-1 gap-y-8">
+    <h1 class="text-2xl text-word-3 text-center font-bold">Import wallet</h1>
     <base-input v-model="name" label="Wallet Name" class="w-full"></base-input>
-    <p>Private key</p>
-    <base-textarea v-model="source"></base-textarea>
+    <base-textarea label="Private key" v-model="source"></base-textarea>
+    <base-button color="blue__bright" class="w-full">Import</base-button>
   </section>
-  <div>
-    <base-button class="w-full">Import</base-button>
-
-    {{ isValidSource }}
-  </div>
+  {{ isValidSource }}
 </template>
 
 <script lang="ts">

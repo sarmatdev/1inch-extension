@@ -64,12 +64,5 @@ export default defineComponent({
   .mnemonic {
     height: 60%;
   }
-  .agreement {
-    position: fixed;
-    width: 280px;
-    bottom: 200px;
-    background-color: #1e2129;
-    z-index: 999;
-  }
 }
 </style>

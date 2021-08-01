@@ -26,23 +26,12 @@ export default defineComponent({
 
 <style lang="scss">
 .base-input {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+  @apply flex flex-col items-start;
   &__label {
-    font-weight: 600;
-    color: #7e96b8;
-    text-align: left;
+    @apply text-word-5 text-left font-medium;
   }
   &__input {
-    width: 100%;
-    background-color: #06070a;
-    border: 1px solid #37445a;
-    color: #fff;
-    padding: 10px 20px;
-    outline: none;
-    border-radius: 12px;
-    font-weight: 500;
+    @apply w-full bg-black border border-word-4 border-solid text-word-3 px-5 py-2.5 outline-none rounded-2xl font-medium;
   }
 }
 </style>

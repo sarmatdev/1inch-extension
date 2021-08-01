@@ -79,14 +79,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #617ba3;
   overflow: scroll;
-  padding: 10px;
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5;
   width: 300px;
   height: 600px;
+  padding: 10px;
   @apply font-main bg-back-9;
-  box-shadow: 0px 5px 15px #27262633;
 }
 .nav__panel {
   @apply flex p-5;

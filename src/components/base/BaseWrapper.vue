@@ -1,5 +1,5 @@
 <template>
-  <div class="token__input__wrapper">
+  <div class="base__wrapper">
     <slot />
   </div>
 </template>
@@ -13,7 +13,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.token__input__wrapper {
-  @apply rounded-2xl w-full flex justify-between items-center;
+.base__wrapper {
+  @apply w-full flex justify-between items-center;
 }
 </style>

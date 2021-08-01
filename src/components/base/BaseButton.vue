@@ -25,7 +25,8 @@ export default defineComponent({
     color: {
       type: String,
       default: 'blue',
-      validator: (value: string) => ['green', 'red', 'blue'].includes(value)
+      validator: (value: string) =>
+        ['green', 'red', 'blue', 'blue__bright'].includes(value)
     }
   },
   computed: {
@@ -42,7 +43,7 @@ export default defineComponent({
 <style module lang="scss">
 .baseButton {
   min-width: 4rem;
-  @apply flex items-center font-semibold justify-center text-blue-300 px-3 py-2 rounded-xl cursor-pointer outline-none transition-colors duration-200;
+  @apply flex items-center font-semibold justify-center text-word-3 px-3 py-2 rounded-xl cursor-pointer outline-none transition-colors duration-200;
   &:disabled {
     cursor: not-allowed;
     @apply bg-gray-500 text-white;
@@ -59,6 +60,9 @@ export default defineComponent({
   }
   &--blue {
     @apply bg-opacity-75 bg-blue-800 hover:bg-blue-700;
+  }
+  &--blue__bright {
+    @apply bg-blue-800 hover:bg-blue-700;
   }
   &--red {
     @apply bg-red-500 hover:bg-red-600;
