@@ -11,7 +11,7 @@
         class="token__input--description__field"
       >
         <description-form>You Pay</description-form>
-        <description-form>Balance:{{ wallet }}</description-form>
+        <description-form>Balance: {{ wallet }}</description-form>
       </div>
       <div
         v-if="tokenPassMode === 'output'"
@@ -37,13 +37,14 @@
             </MenuButton>
             <amount-pass-form
               v-if="tokenPassMode === 'input'"
-              v-model="token"
+              v-model="amount"
               placeholder="0.0"
               passMode="input"
             ></amount-pass-form>
             <amount-pass-form
               v-if="tokenPassMode === 'output'"
               passMode="output"
+              v-model="amount"
             >
               {{ secondToken }}
             </amount-pass-form>
@@ -106,7 +107,7 @@ import DescriptionForm from '../forms/TokenInput/DescriptionForm.vue'
 import UnfoundForm from '../forms/TokenInput/UnfoundForm.vue'
 import CustomTokenInputForm from '../forms/TokenInput/CustomTokenInputForm.vue'
 import { mapGetters, mapActions } from 'vuex'
-
+import BN from 'bignumber.js'
 export default defineComponent({
   name: 'TokenSwapHandler',
   components: {
@@ -123,23 +124,21 @@ export default defineComponent({
     UnfoundForm,
     CustomTokenInputForm
   },
-  created() {
-    this.fetchTokens()
-  },
   data() {
     return {
       modalShowStatus: false,
       tokenForSearch: '',
+      amount: 0,
       selectedToken: {
-        symbol: 'CTSI',
-        name: 'Cartesi Token',
+        symbol: 'MATIC',
+        name: 'MATIC',
         decimals: 18,
-        address: '0x491604c0fdf08347dd1fa4ee062a822a5dd06b5d',
+        address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
         logoURI:
-          'https://tokens.1inch.exchange/0x491604c0fdf08347dd1fa4ee062a822a5dd06b5d.png'
+          'https://tokens.1inch.exchange/0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0.png'
       },
       //=============== Testing data =================
-      secondToken: '123',
+      secondToken: '0',
       wallet: '1.0091'
       //==============================================
     }
@@ -149,6 +148,20 @@ export default defineComponent({
       type: String,
       default: 'input',
       validator: (value: string) => ['input', 'output'].includes(value)
+    }
+  },
+  watch: {
+    selectedToken: {
+      immediate: true,
+      handler() {
+        this.$emit('handleToken', this.selectedToken)
+      }
+    },
+    amount: {
+      immediate: true,
+      handler() {
+        this.$emit('amount', new BN(this.amount).times(`1e${this.decimals}`))
+      }
     }
   },
   methods: {
@@ -175,7 +188,11 @@ export default defineComponent({
   computed: {
     ...mapGetters({
       tokens: 'settings/tokens'
-    })
+    }),
+    decimals() {
+      // @ts-ignore
+      return this.selectedToken.decimals
+    }
   }
 })
 </script>
