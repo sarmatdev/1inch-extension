@@ -1,0 +1,20 @@
+{
+  "key": "42",
+  "chainId": 42,
+  "chainName": "Ethereum",
+  "name": "Ethereum Testnet Kovan",
+  "shortName": "Kovan",
+  "network": "kovan",
+  "unknown": false,
+  "rpc": "https://speedy-nodes-nyc.moralis.io/e7d110f4a238e0246bbe5278/eth/mainnet",
+  "ws": "wss://speedy-nodes-nyc.moralis.io/e7d110f4a238e0246bbe5278/eth/mainnet/ws",
+  "explorer": "https://etherscan.io",
+  "nativeAsset": {
+    "name": "Ether",
+    "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+    "symbol": "ETH",
+    "decimals": 18,
+    "deeplinkId": "ether",
+    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+  }
+}
