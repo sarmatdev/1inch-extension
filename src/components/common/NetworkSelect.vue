@@ -92,7 +92,7 @@ export default {
         { name: 'BSC Mainnet', icon: 'bsc', id: 56 },
         { name: 'Polygon Network', icon: 'polygon', id: 137 }
       ],
-      selectedNetwork: { name: 'Ethereum', icon: 'eth', id: 1 }
+      selectedNetwork: { name: 'Polygon Network', icon: 'polygon', id: 137 }
     }
   },
   methods: {

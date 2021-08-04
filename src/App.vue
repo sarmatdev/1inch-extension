@@ -85,7 +85,7 @@ body {
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5;
-  width: 300px;
+  width: 360px;
   height: 600px;
   padding: 10px;
   @apply font-main bg-back-9;

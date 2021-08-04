@@ -14,7 +14,7 @@ export interface SettingsState {
 }
 
 const state: SettingsState = {
-  selectedNetwork: 1,
+  selectedNetwork: 137,
   tokens: []
 }
 const mutations = {
@@ -22,19 +22,20 @@ const mutations = {
     state.selectedNetwork = id
   },
   setTokens(state: SettingsState, tokens: Array<IToken>) {
-    state.tokens = tokens
+    state.tokens = Object.values(tokens)
   }
 }
 const actions = {
   async fetchTokens({ commit }) {
     const tokens = await getTokens()
     commit('setTokens', tokens.data.tokens)
-    console.log('tokens', tokens.data.tokens)
   }
 }
 const getters = {
   selectedNetwork: (s: SettingsState) => s.selectedNetwork,
-  tokens: (s: SettingsState) => Object.values(s.tokens)
+  tokens: (s: SettingsState) => {
+    return s.tokens.slice(0, 30)
+  }
 }
 
 export default {

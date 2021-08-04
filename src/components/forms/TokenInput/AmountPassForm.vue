@@ -19,7 +19,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'AmountPassForm',
   props: {
-    modelValue: String,
+    modelValue: [String, Number],
     placeholder: String,
     type: {
       type: String,
