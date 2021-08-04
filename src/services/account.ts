@@ -29,3 +29,7 @@ export function validatePrivateKey(privateKey: string): boolean {
     return false
   }
 }
+
+export function createFromPrivateKey(privateKey: string): Wallet {
+  return new Wallet(privateKey)
+}
