@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import { registerBaseComponents } from './helpers/registerBaseComponents'
 import './styles/tailwind.css'
+import Web3Plugin from '@/services/web3/web3.plugin'
+import { Web3Provider } from '@ethersproject/providers'
 
 export const app = createApp(App)
 
@@ -11,5 +13,5 @@ export const app = createApp(App)
 registerBaseComponents(app)
 
 document.addEventListener('DOMContentLoaded', () => {
-  app.use(store).use(router).mount('#app')
+  app.use(store).use(router).use(Web3Plugin, Web3Provider).mount('#app')
 })
