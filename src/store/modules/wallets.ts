@@ -5,19 +5,22 @@ import { v4 as uuidv4 } from 'uuid'
 interface Account {
   name: string
   address: string
+  privateKey: string
+  salt: string
 }
 
 export interface WalletsState {
-  address: ''
+  selectedWallet: Account
   accounts: Array<Account>
 }
 
 const state = {
-  address: '',
+  selectedWallet: {},
   accounts: []
 }
 const mutations = {
   setWallet(state: WalletsState, account: Account): void {
+    state.selectedWallet = account
     state.accounts.push(account)
   }
 }
@@ -35,6 +38,7 @@ const actions = {
   }
 }
 const getters = {
+  selectedWallet: (s: WalletsState) => s.selectedWallet,
   accounts: (s: WalletsState) => s.accounts,
   accountsNum: (s: WalletsState) => s.accounts.length
 }
