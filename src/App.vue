@@ -1,13 +1,12 @@
 <template>
   <div class="header__menu">
     <base-wrapper>
-      <base-logo
+      <!-- <base-logo
         @click="$router.push('/')"
         class="cursor-pointer"
         icon="icon-48x48"
-      ></base-logo>
+      ></base-logo> -->
       <network-select></network-select>
-      <base-icon class="cursor-pointer" icon="/swap-btn/settings"></base-icon>
     </base-wrapper>
   </div>
   <div class="nav">

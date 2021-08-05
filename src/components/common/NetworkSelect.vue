@@ -17,23 +17,25 @@
             active_eth: selectedNetwork.id === 1
           },
           {
-            active_bscm: selectedNetwork.id === 56
+            active_bsc: selectedNetwork.id === 56
           },
           {
             active_polygon: selectedNetwork.id === 137
           }
         ]"
       >
-        <base-icon
+        <base-logo
           class="w-8 h-8"
+          type="svg"
           :icon="`/network-select/${selectedNetwork.icon}-selected`"
-        ></base-icon>
+        />
+        {{ selectedNetwork.name }}
 
         <base-icon
+          name="chevron-down"
           class="text-white ml-2.5 w-4 h-4"
           :class="{ 'transform rotate-180': open }"
-          icon="/network-select/arrow"
-        ></base-icon>
+        />
       </ListboxButton>
 
       <transition
@@ -67,10 +69,11 @@
                 'flex items-center cursor-pointer select-none my-2 px-5 py-2 '
               ]"
             >
-              <base-icon
+              <base-logo
                 class="w-8 h-8"
+                type="svg"
                 :icon="`/network-select/${network.icon}`"
-              ></base-icon>
+              />
               <base-title class="ml-2.5 text-left">{{
                 network.name
               }}</base-title>
@@ -119,7 +122,6 @@ export default defineComponent({
     function select(network) {
       selectedNetwork = network
       store.commit('settings/setSelectedNetwork', selectedNetwork.id)
-      useRefreshApi()
     }
 
     return {
@@ -136,7 +138,7 @@ export default defineComponent({
   &_eth {
     background: linear-gradient(73.28deg, #495bfc 6.51%, #114188 88.45%);
   }
-  &_bscm {
+  &_bsc {
     background: linear-gradient(73.28deg, #403c3c 6.51%, #403721 88.45%);
   }
   &_polygon {
