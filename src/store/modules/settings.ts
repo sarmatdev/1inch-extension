@@ -1,27 +1,32 @@
 import { getTokens } from '@/api/tokens.api'
+import{TokenList} from '@/types/tokens'
 
-interface IToken {
-  address: string
-  decimals: number
-  logoURI: string
-  name: string
-  symbol: string
-}
 
-export interface SettingsState {
-  selectedNetwork: number
-  tokens: Array<IToken>
-}
-
-const state: SettingsState = {
+const state = {
   selectedNetwork: 1,
-  tokens: []
+  tokens: [],
+  InputTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  OutTokenAddress: "0x111111111117dc0aa78b770fa6a738034120c302",
+  InputTokenAmount: "10000000000000000",
+  OutTokenAmount: ""
 }
 const mutations = {
-  setSelectedNetwork(state: SettingsState, id: number) {
+  setOutTokenAmount(state, OutAmount) {
+    state.OutTokenAmount = OutAmount
+  },
+  setInputTokenAmount(state, InputAmount) {
+    state.InputTokenAmount = InputAmount
+  },
+  setOutTokenAddress(state, InputAddress) {
+    state.OutTokenAddress = InputAddress
+  },
+  setInputTokenAddress(state, OutAddress) {
+    state.InputTokenAddress = OutAddress
+  },
+  setSelectedNetwork(state, id: number) {
     state.selectedNetwork = id
   },
-  setTokens(state: SettingsState, tokens: Array<IToken>) {
+  setTokens(state, tokens: TokenList) {
     state.tokens = tokens
   }
 }
@@ -29,12 +34,15 @@ const actions = {
   async fetchTokens({ commit }) {
     const tokens = await getTokens()
     commit('setTokens', tokens.data.tokens)
-    console.log('tokens', tokens.data.tokens)
   }
 }
 const getters = {
-  selectedNetwork: (s: SettingsState) => s.selectedNetwork,
-  tokens: (s: SettingsState) => Object.values(s.tokens)
+  InputTokenAddress: (s) => s.InputTokenAddress,
+  InputTokenAmount: (s) => s.InputTokenAmount,
+  OutTokenAmount: (s) => s.OutTokenAmount,
+  OutTokenAddress: (s) => s.OutTokenAddress,
+  selectedNetwork: (s) => s.selectedNetwork,
+  tokens: (s) => Object.values(s.tokens)
 }
 
 export default {

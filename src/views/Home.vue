@@ -1,15 +1,6 @@
 <template>
-  <div class="swap__page--container">
-    <token-swap-handler
-      class="swap__page--container--item"
-      tokenPassMode="input"
-    ></token-swap-handler>
-
-    <token-swap-handler
-      class="swap__page--container--item"
-      tokenPassMode="output"
-    ></token-swap-handler>
-    <p>>{{ selectedNetwork }}</p>
+  <div>
+    <token-swap-handler />
   </div>
 </template>
 
