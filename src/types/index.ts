@@ -1,9 +1,9 @@
-export interface TokenInput {
+export interface IToken {
   address: string
   symbol: string
   name: string
   decimals: number
-  amount: string
+  amount?: string
 }
 export interface INetwork {
   name: string
