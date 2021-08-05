@@ -5,5 +5,5 @@ export default interface SettingsState {
   tokens: TokenList
   FromToken: string | number | any
   ToToken: string | number | any
-  TokenAmount: string | number | amy
+  TokenAmount: string | number | any
 }
