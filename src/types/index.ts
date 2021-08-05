@@ -5,3 +5,8 @@ export interface TokenInput {
   decimals: number
   amount: string
 }
+export interface INetwork {
+  name: string
+  icon: string
+  id: number
+}

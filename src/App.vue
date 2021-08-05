@@ -46,14 +46,15 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import NetworkSelect from './components/common/NetworkSelect.vue'
 import { useStore } from 'vuex'
+import NetworkSelect from './components/common/NetworkSelect.vue'
+import useRefreshApi from './composables/useRefreshApi'
+// import { getQuote } from '@/api/quote.api'
 
 export default defineComponent({
   components: { NetworkSelect },
   setup() {
-    const store = useStore()
-    store.dispatch('settings/fetchTokens')
+    useRefreshApi()
     console.log('Hello, 1inch!🦄')
   }
 })

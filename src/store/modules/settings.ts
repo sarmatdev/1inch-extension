@@ -1,12 +1,5 @@
 import { getTokens } from '@/api/tokens.api'
-
-interface IToken {
-  address: string
-  decimals: number
-  logoURI: string
-  name: string
-  symbol: string
-}
+import { IToken } from '@/types/tokens'
 
 export interface SettingsState {
   selectedNetwork: number
@@ -18,7 +11,19 @@ const state: SettingsState = {
   tokens: []
 }
 const mutations = {
-  setSelectedNetwork(state: SettingsState, id: number) {
+  setOutTokenAmount(state, OutAmount) {
+    state.OutTokenAmount = OutAmount
+  },
+  setInputTokenAmount(state, InputAmount) {
+    state.InputTokenAmount = InputAmount
+  },
+  setOutTokenAddress(state, InputAddress) {
+    state.OutTokenAddress = InputAddress
+  },
+  setInputTokenAddress(state, OutAddress) {
+    state.InputTokenAddress = OutAddress
+  },
+  setSelectedNetwork(state, id: number) {
     state.selectedNetwork = id
   },
   setTokens(state: SettingsState, tokens: Array<IToken>) {

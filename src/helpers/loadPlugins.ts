@@ -1,5 +1,4 @@
 const loadPlugins = (filenames: Array<string>): void => {
-  console.log('filenames', filenames)
   const requirePlugin = require.context('@/plugins', false, /\.ts$/)
   const fileMap = {}
 

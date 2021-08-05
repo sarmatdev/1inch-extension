@@ -1,20 +1,6 @@
 <template>
-  <div class="swap__page--container">
-    <token-swap-handler
-      class="swap__page--container--item"
-      tokenPassMode="input"
-      @handleToken="handleTokenIn"
-      @amount="handleAmount"
-    ></token-swap-handler>
-
-    <token-swap-handler
-      class="swap__page--container--item"
-      tokenPassMode="output"
-      @handleToken="handleTokenOut"
-    ></token-swap-handler>
-    <base-button :loading="loading" color="gradient" @click="swap"
-      >swap</base-button
-    >
+  <div>
+    <token-swap-handler />
   </div>
 </template>
 

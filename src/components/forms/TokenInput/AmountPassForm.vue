@@ -1,14 +1,17 @@
 <template>
-  <div class="token__amount__input">
+  <div class="flex items-center p-1.5 border-0 border-solid bg-black">
     <input
       v-if="passMode === 'input'"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-      class="token__amount__input--container"
+      class="bg-black h-full w-full outline-none text-right text-xl text-word-3"
       :type="type"
       :placeholder="placeholder"
     />
-    <p v-if="passMode === 'output'" class="token__amount__output--container">
+    <p
+      v-if="passMode === 'output'"
+      class="bg-black h-full w-full text-right text-xl text-word-3"
+    >
       <slot />
     </p>
   </div>
@@ -36,11 +39,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .token__amount__input {
-  @apply flex
-      items-center
-      p-1.5
-      border-0 border-solid
-      bg-black;
+  @apply flex items-center p-1.5 border-0 border-solid bg-black;
   &--container {
     @apply bg-black h-full w-full outline-none text-right text-xl text-word-3;
   }
