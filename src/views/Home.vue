@@ -1,34 +1,70 @@
 <template>
   <div>
-    <token-swap-handler />
+    <TokenInput
+      @handleToken="tokenInput"
+      @hanldeApprove="hanldeApprove"
+      title="You Pay"
+    />
+    <TokenInput
+      disabled
+      class="mt-4"
+      @handleToken="tokenOutput"
+      title="You Recieve"
+    />
+    <base-button v-if="needApprove" class="mt-8" block color="gradient"
+      >Approve</base-button
+    >
+    <base-button
+      v-else
+      @click="swap"
+      :loading="loading"
+      class="mt-8"
+      block
+      color="gradient"
+      >swap</base-button
+    >
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { swapTokens } from '@/services/swap'
-import TokenSwapHandler from '../components/common/TokenSwapHandler.vue'
 import useWeb3 from '@/services/web3/useWeb3'
-import { TokenInput } from '@/types'
-
+import { IToken } from '@/types'
+import TokenInput from '@/components/common/Swap/TokenInput.vue'
 export default defineComponent({
   name: 'Home',
-  components: { TokenSwapHandler },
+  components: {
+    TokenInput
+  },
   setup() {
     const { wallet } = useWeb3()
 
-    let tokenIn = ref<TokenInput | any>()
-    let tokenOut = ref<TokenInput | any>()
-    let amount = ref('0')
-    let loading = ref(false)
+    const tokenIn = ref<IToken | any>()
+    const tokenOut = ref<IToken | any>()
+    const needApprove = ref(false)
+    const loading = ref(false)
+    const disabled = ref(false)
+
+    function tokenInput(token) {
+      tokenIn.value = token
+    }
+
+    function tokenOutput(token) {
+      tokenOut.value = token
+    }
+
+    function hanldeApprove(e) {
+      needApprove.value = e.value
+    }
 
     async function swap() {
       loading.value = true
 
       swapTokens({
-        fromTokenAddress: tokenIn.value.address,
-        toTokenAddress: tokenOut.value.address,
-        amount,
+        fromTokenAddress: tokenIn.value.value.address,
+        toTokenAddress: tokenOut.value.value.address,
+        amount: tokenIn.value.value.amount,
         fromAddress: wallet.value.address,
         slippage: 1
       })
@@ -43,27 +79,16 @@ export default defineComponent({
         })
     }
 
-    function handleTokenIn(value) {
-      tokenIn.value = value
-    }
-
-    function handleTokenOut(value) {
-      tokenOut.value = value
-    }
-
-    function handleAmount(val) {
-      amount.value = val.toString()
-    }
-
     return {
-      swap,
       tokenIn,
       tokenOut,
       loading,
-      handleTokenIn,
-      handleTokenOut,
-      handleAmount,
-      amount
+      tokenInput,
+      tokenOutput,
+      swap,
+      hanldeApprove,
+      needApprove,
+      disabled
     }
   }
 })
