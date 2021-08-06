@@ -1,39 +1,36 @@
 <template>
-  <main class="create__wallet">
-    <section class="create__wallet--confirm__mnemonic">
-      <h1 class="create__wallet--confirm__mnemonic__header">
-        Confirm mnemonic
-      </h1>
-      <base-input
-        v-model="walletName"
-        class="create__wallet--confirm__mnemonic__input"
-        placeholder="Name"
-        label="Set the wallet name"
-      ></base-input>
-      <base-textarea
-        label="You must write the phrase in the correct order"
-        v-model.trim="mnemonicForConfirm"
-      ></base-textarea>
-      <ul class="create__wallet--confirm__mnemonic__list">
-        <li
-          class="create__wallet--confirm__mnemonic__list--item"
-          v-for="(mnemonicItem, idx) in mnemonicForConfirm
-            .split(' ')
-            .sort(() => Math.round(Math.random() * 100) - 50)"
-          :key="idx"
-          @click="mnemonicForConfirm.split(' ').push(mnemonicItem).join(' ')"
-        >
-          {{ mnemonicItem }}
-        </li>
-      </ul>
-      <base-button
-        @click="saveWallet"
-        :disabled="!mnemonicConfirmed"
-        class="create__wallet--confirm__mnemonic__button"
-        >Create Wallet</base-button
+  <section class="text-center grid grid-cols-1 gap-y-3">
+    <h1 class="text-2xl text-word-3">Confirm mnemonic</h1>
+    <base-input
+      v-model="walletName"
+      class="confirm__mnemonic__input"
+      placeholder="Name"
+      label="Set the wallet name"
+    ></base-input>
+    <base-textarea
+      label="You must write the phrase in the correct order"
+      v-model.trim="mnemonicForConfirm"
+    ></base-textarea>
+    <ul class="confirm__mnemonic__list">
+      <li
+        class="confirm__mnemonic__list--item"
+        v-for="(mnemonicItem, idx) in mnemonicForConfirm
+          .split(' ')
+          .sort(() => Math.round(Math.random() * 100) - 50)"
+        :key="idx"
+        @click="mnemonicForConfirm.split(' ').push(mnemonicItem).join(' ')"
       >
-    </section>
-  </main>
+        {{ mnemonicItem }}
+      </li>
+    </ul>
+    <base-button
+      @click="saveWallet"
+      color="blue"
+      :disabled="!mnemonicConfirmed"
+      class="confirm__mnemonic__button"
+      >Create Wallet</base-button
+    >
+  </section>
 </template>
 
 <script lang="ts">
@@ -82,24 +79,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.create__wallet {
-  &--confirm__mnemonic {
-    @apply text-center grid grid-cols-1 gap-y-3;
-    &__header {
-      @apply text-2xl text-word-3;
+.confirm__mnemonic {
+  @apply text-center grid grid-cols-1 gap-y-3;
+  &__header {
+    @apply text-2xl text-word-3;
+  }
+  &__input {
+    @apply w-full;
+  }
+  &__list {
+    @apply grid grid-cols-3 gap-2;
+    &--item {
+      @apply border border-word-4 text-word-4 border-solid rounded-xl cursor-pointer;
     }
-    &__input {
-      @apply w-full;
-    }
-    &__list {
-      @apply grid grid-cols-3 gap-2;
-      &--item {
-        @apply border border-word-4 text-word-4 border-solid rounded-xl cursor-pointer;
-      }
-    }
-    &__button {
-      @apply w-full text-word-3;
-    }
+  }
+  &__button {
+    @apply mx-16;
   }
 }
 </style>

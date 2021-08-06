@@ -1,10 +1,15 @@
 <template>
+  <!-- <CustomTokenModal
+      v-if="modalShowStatus"
+      class="testModal fixed inset-0"
+      @ModalCloseEvent="closeModal()"
+    /> -->
   <div class="w-full bg-back-10 rounded-lg relative">
     <div class="flex justify-between p-2 text-sm">
       <span>{{ title }}:</span>
       <p>
         <span> Balance: </span>
-        <span>{{ balances.balance.toFixed(4) }} </span>
+        <!-- <span>{{ balances.balance.toFixed(4) }} </span> -->
       </p>
     </div>
     <div class="flex justify-between items-center p-2">
@@ -57,12 +62,11 @@
                 v-model="tokenForSearch"
                 placeholder="Search by name or paste the address"
             /></MenuItem>
-            <MenuItem
-              v-for="token in filteredTokens"
-              :key="token.name"
-              @click="selectToken(token)"
-            >
+            <MenuItem as="div" v-if="filteredTokens.length">
               <div
+                v-for="token in filteredTokens"
+                :key="token.name"
+                @click="selectToken(token)"
                 class="
                   flex
                   items-center
@@ -77,23 +81,46 @@
                   <img class="h-10" :src="token.logoURI" alt="" />
                   <div class="ml-2 leading-tight">
                     <span class="font-bold text-white">{{ token.name }}</span>
-                    <span class="block">32 {{ token.symbol }}</span>
+                    <span class="block">{{ amount }} - {{ token.symbol }}</span>
                   </div>
                 </div>
                 <span class="font-bold text-white">$32.11</span>
               </div>
             </MenuItem>
+            <MenuItem as="div" v-if="!filteredTokens.length">
+              <div class="flex flex-col justify-center">
+                <base-img class="w-32 h-32 mx-auto" icon="token-input/coins" />
+                <span class="text-center text-sm">
+                  Nothing found. Use Custom token feature.
+                </span>
+                <base-button color="blue" size="sm" class="mt-6 mx-20">
+                  <base-icon
+                    @click="openModal"
+                    class="text-white mr-2"
+                    name="plus-circle"
+                    size="sm"
+                  />
+                  <span> Add Token </span>
+                </base-button>
+              </div>
+            </MenuItem>
           </MenuItems>
         </transition>
       </Menu>
+      <span
+        v-if="OutAmount"
+        class="text-right text-white text-xl w-44 bg-transparent"
+        >{{ OutAmount }}</span
+      >
       <input
+        v-if="!OutAmount"
         class="text-right text-white text-xl w-44 bg-transparent outline-none"
         type="number"
         placeholder="0"
         v-model="amount"
         v-bind="$attrs"
         :disabled="disabled"
-        @keydown="onKeydown"
+        @input="$emit('update:AmountValue', $event.target.value)"
       />
     </div>
     <div class="flex justify-between p-2 text-sm">
@@ -104,7 +131,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch, watchEffect } from 'vue'
+import { defineComponent, computed, ref, watchEffect } from 'vue'
+// import CustomTokenModal from '@/components/common/Swap/modal/CustomTokenModal.vue'
 import { useStore } from 'vuex'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import BN from 'bignumber.js'
@@ -117,17 +145,24 @@ export default defineComponent({
     MenuButton,
     MenuItems,
     MenuItem
+    // CustomTokenModal
   },
   props: {
     title: { type: String, required: true },
-    disabled: { type: Boolean }
+    disabled: { type: Boolean },
+    defaultTokenIdx: Number,
+    AmountValue: Number,
+    OutAmount: {
+      type: Number,
+      default: 0
+    }
   },
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const store = useStore()
 
-    const amount = ref(undefined)
     const tokens = computed(() => store.getters['swap/tokens']).value
-    const selectedToken = ref({ ...tokens[0], amount: 0 })
+    const amount = ref(undefined)
+    const selectedToken = ref({ ...tokens[props.defaultTokenIdx], amount: 0 })
 
     const tokenForSearch = ref('')
     const filteredTokens = computed(() => {
@@ -137,18 +172,18 @@ export default defineComponent({
           el.symbol.toLowerCase().includes(tokenForSearch.value.toLowerCase())
       )
     })
-    const balances = computed(() =>
-      store.getters['swap/balances'](selectedToken)
-    )
-    const needApprove = computed(() => balances.value.allowance === 0)
+    // const balances = computed(() =>
+    //   store.getters['swap/balances'](selectedToken)
+    // )
+    // const needApprove = computed(() => balances.value.allowance === 0)
 
     function selectToken(token: IToken): void {
       selectedToken.value = token
     }
 
-    watch(needApprove, () => {
-      emit('hanldeApprove', needApprove)
-    })
+    // watch(needApprove, () => {
+    //   emit('hanldeApprove', needApprove)
+    // })
 
     watchEffect(() => {
       const amountBN = new BN(Number(amount.value)).times(
@@ -158,15 +193,26 @@ export default defineComponent({
       emit('handleToken', selectedToken)
     })
 
+    // const modalShowStatus = ref(false).value
+    // function closeModal() {
+    //   modalShowStatus.value = false
+    // }
+    // function openModal() {
+    //   modalShowStatus.value = true
+    // }
+
     return {
       tokens,
       selectedToken,
       selectToken,
       amount,
       filteredTokens,
-      tokenForSearch,
-      balances,
-      needApprove
+      tokenForSearch
+      // balances,
+      // needApprove,
+      // modalShowStatus,
+      // closeModal,
+      // openModal
     }
   }
 })

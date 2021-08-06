@@ -1,5 +1,5 @@
 <template>
-  <div class="bal-icon inline-block">
+  <div class="base-icon inline-block">
     <i :data-feather="name" :width="iconSize" :height="iconSize" :fill="fill" />
   </div>
 </template>
@@ -9,7 +9,7 @@ import feather from 'feather-icons'
 import { computed, defineComponent, onMounted } from 'vue'
 
 export default defineComponent({
-  name: 'BalIcon',
+  name: 'BaseIcon',
 
   props: {
     name: { type: String, required: true },

@@ -1,13 +1,11 @@
 <template>
   <div class="header__menu">
-    <base-wrapper>
-      <!-- <base-logo
+    <!-- <base-logo
         @click="$router.push('/')"
         class="cursor-pointer"
         icon="icon-48x48"
       ></base-logo> -->
-      <network-select></network-select>
-    </base-wrapper>
+    <network-select />
   </div>
   <div class="nav">
     <ul class="nav__panel">
@@ -18,7 +16,7 @@
             isExactActive ? 'text-word-3' : 'text-word-5 hover:text-blue-500'
           ]"
         >
-          Swap
+          Home
           <hr
             class="nav__panel--link__line"
             :class="{ hidden: !isExactActive }"
@@ -62,7 +60,7 @@ export default defineComponent({
 <style lang="scss">
 body {
   width: 100vw;
-  min-width: 300px;
+  min-width: 360px;
   height: 100vh;
   min-height: 600px;
   display: flex;
