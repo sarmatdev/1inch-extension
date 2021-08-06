@@ -25,6 +25,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/import-wallet',
     name: 'ImportWallet',
     component: () => import('../views/wallet/ImportWallet.vue')
+  },
+  {
+    path: '/confirm-swap',
+    name: 'ConfirmSwap',
+    component: () => import('../views/swap/ConfirmSwap.vue'),
+    meta: {transitionName: 'slide'}
   }
 ]
 

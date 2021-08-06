@@ -17,24 +17,22 @@
             active_eth: selectedNetwork.id === 1
           },
           {
-            active_bsc: selectedNetwork.id === 56
+            active_bscm: selectedNetwork.id === 56
           },
           {
             active_polygon: selectedNetwork.id === 137
           }
         ]"
       >
-        <base-logo
+        <base-img
           class="w-8 h-8"
-          type="svg"
-          :icon="`/network-select/${selectedNetwork.icon}-selected`"
+          :icon="`network-select/${selectedNetwork.icon}-selected`"
         />
-        {{ selectedNetwork.name }}
 
         <base-icon
-          name="chevron-down"
           class="text-white ml-2.5 w-4 h-4"
           :class="{ 'transform rotate-180': open }"
+          name="chevron-down"
         />
       </ListboxButton>
 
@@ -69,14 +67,11 @@
                 'flex items-center cursor-pointer select-none my-2 px-5 py-2 '
               ]"
             >
-              <base-logo
+              <base-img
                 class="w-8 h-8"
-                type="svg"
-                :icon="`/network-select/${network.icon}`"
-              />
-              <base-title class="ml-2.5 text-left">{{
-                network.name
-              }}</base-title>
+                :icon="`network-select/${network.icon}`"
+              ></base-img>
+              <span class="ml-2.5 text-left">{{ network.name }}</span>
             </li>
           </ListboxOption>
         </ListboxOptions>
@@ -95,7 +90,6 @@ import {
 } from '@headlessui/vue'
 import { useStore } from 'vuex'
 import useRefreshApi from '@/composables/useRefreshApi'
-
 export default defineComponent({
   name: 'NetworkSelect',
   components: {
@@ -112,18 +106,16 @@ export default defineComponent({
       id: 1
     })
     store.commit('settings/setSelectedNetwork', selectedNetwork.id)
-
     const networks = ref([
       { name: 'Ethereum', icon: 'eth', id: 1 },
       { name: 'BSC Mainnet', icon: 'bsc', id: 56 },
       { name: 'Polygon Network', icon: 'polygon', id: 137 }
     ])
-
     function select(network) {
       selectedNetwork = network
       store.commit('settings/setSelectedNetwork', selectedNetwork.id)
+      useRefreshApi()
     }
-
     return {
       selectedNetwork,
       networks,
@@ -138,7 +130,7 @@ export default defineComponent({
   &_eth {
     background: linear-gradient(73.28deg, #495bfc 6.51%, #114188 88.45%);
   }
-  &_bsc {
+  &_bscm {
     background: linear-gradient(73.28deg, #403c3c 6.51%, #403721 88.45%);
   }
   &_polygon {
