@@ -8,7 +8,6 @@ const swap = ({
   fromAddress,
   slippage
 }) => {
-  console.log(amount)
   return httpClient.get(
     `${END_POINT}?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amount}&fromAddress=${fromAddress}&slippage=${slippage}`
   )

@@ -48,7 +48,7 @@
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'CustomTokenInputForm',
-  setup(_,{emit}) {
+  setup(_, { emit }) {
     const hasError = ref(true)
 
     function modalClose() {
