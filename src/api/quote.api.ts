@@ -1,9 +1,9 @@
 import httpClient from './httpClient'
 const END_POINT = '/quote'
 
-const getQuote = (InputAddress, OutAddress, InputAmounT) => {
+const getQuote = ({ tokenIn, tokenOut, amount }) => {
   return httpClient.get(
-    `${END_POINT}?fromTokenAddress=${InputAddress}&toTokenAddress=${OutAddress}&amount=${InputAmounT}`
+    `${END_POINT}?fromTokenAddress=${tokenIn}&toTokenAddress=${tokenOut}&amount=${amount}`
   )
 }
 
