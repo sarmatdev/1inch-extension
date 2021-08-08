@@ -82,7 +82,6 @@
                     >
                   </div>
                 </div>
-                <span class="font-bold text-white">~$ 32</span>
               </div>
             </MenuItem>
             <MenuItem as="div" v-if="!filteredTokens.length">
