@@ -1,5 +1,5 @@
 <template>
-  <section class="text-center grid grid-cols-1 gap-y-3">
+  <section class="text-center grid grid-cols-1 gap-y-8">
     <h1 class="text-2xl text-word-3">Confirm mnemonic</h1>
     <base-input
       v-model="walletName"

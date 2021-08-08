@@ -20,9 +20,9 @@ export default defineComponent({
 
     watch(blockNumber, () => {
       store.dispatch('swap/fetchTokens')
+      store.dispatch('swap/fetchMarkets')
       store.dispatch('swap/fetchAllowancesAndBalances')
     })
-
     console.log('Hello, 1inch!🐴')
   }
 })

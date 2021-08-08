@@ -1,6 +1,6 @@
 <template>
   <main class="create__wallet">
-    <section class="text-center grid grid-cols-1 gap-y-2 mb-10">
+    <section class="text-center grid grid-cols-1 gap-y-6 mb-10">
       <h1 class="text-white font-black text-lg">Your mnemonic phrase</h1>
       <p class="text-sm mx-2.5">
         Write down or copy this phrase in the correct order and keep it in a
@@ -41,7 +41,7 @@
         color="blue"
         @click="continueToConfirm"
         :disabled="!agree"
-        class="mx-10"
+        class="mx-auto"
         >Continue</base-button
       >
     </section>
@@ -55,7 +55,7 @@ import WordList from '@/components/common/WordList.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 
 export default defineComponent({
-  name: 'CraeteWallet',
+  name: 'CreateWallet',
   components: {
     WordList,
     BaseButton
@@ -67,7 +67,7 @@ export default defineComponent({
     const agree = ref(false)
 
     function continueToConfirm() {
-      emit('nextStep', 3)
+      emit('nextStep', 2)
     }
 
     return {
