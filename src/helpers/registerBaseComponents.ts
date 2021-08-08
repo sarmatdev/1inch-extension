@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import { camelCase, upperFirst } from 'lodash-es'
 
-export const registerBaseComponents = (app: App): void => {
+const registerBaseComponents = (app: App): void => {
   const requireComponent = require.context(
     '../components/base',
     true,
@@ -16,3 +16,5 @@ export const registerBaseComponents = (app: App): void => {
     app.component(componentName, componentConfig.default || componentConfig)
   })
 }
+
+export default registerBaseComponents

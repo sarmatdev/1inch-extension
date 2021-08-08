@@ -1,66 +1,42 @@
 <template>
-  <div class="header__menu">
-    <base-wrapper>
-      <base-logo
-        @click="$router.push('/')"
-        class="cursor-pointer"
-        icon="icon-48x48"
-      ></base-logo>
-      <network-select></network-select>
-      <base-icon class="cursor-pointer" icon="/swap-btn/settings"></base-icon>
-    </base-wrapper>
+  <AppHeader />
+  <div class="container h-full p-2">
+    <router-view />
   </div>
-  <div class="nav">
-    <ul class="nav__panel">
-      <router-link v-slot="{ isExactActive }" to="/">
-        <li
-          class="nav__panel--item"
-          :class="[
-            isExactActive ? 'text-word-3' : 'text-word-5 hover:text-blue-500'
-          ]"
-        >
-          Swap
-          <hr
-            class="nav__panel--link__line"
-            :class="{ hidden: !isExactActive }"
-          />
-        </li>
-      </router-link>
-      <router-link v-slot="{ isExactActive }" to="/welcome">
-        <li
-          class="nav__panel--item"
-          :class="[
-            isExactActive ? 'text-word-3' : 'text-word-5 hover:text-blue-500'
-          ]"
-        >
-          Wallet
-          <hr
-            class="nav__panel--link__line"
-            :class="{ hidden: !isExactActive }"
-          />
-        </li>
-      </router-link>
-    </ul>
-  </div>
-  <router-view />
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
-import NetworkSelect from './components/common/NetworkSelect.vue'
+import { defineComponent, watch } from 'vue'
+import AppHeader from '@/components/common/App/AppHeader.vue'
 import { useStore } from 'vuex'
+import useWeb3 from '@/services/web3/useWeb3'
+import useRefreshApi from './composables/useRefreshApi'
 
 export default defineComponent({
-  components: { NetworkSelect },
+  components: { AppHeader },
   setup() {
+    useRefreshApi()
     const store = useStore()
-    store.dispatch('settings/fetchTokens')
-    console.log('Hello, 1inch!🦄')
+    const { blockNumber } = useWeb3()
+
+    watch(blockNumber, () => {
+      store.dispatch('swap/fetchTokens')
+      store.dispatch('swap/fetchAllowancesAndBalances')
+    })
+
+    console.log('Hello, 1inch!🐴')
   }
 })
 </script>
 
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
 body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   width: 100vw;
   min-width: 300px;
   height: 100vh;
@@ -71,11 +47,6 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
-
-::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -85,18 +56,8 @@ body {
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5;
-  width: 300px;
+  width: 360px;
   height: 600px;
-  padding: 10px;
   @apply font-main bg-back-9;
-}
-.nav__panel {
-  @apply flex p-5;
-  &--item {
-    @apply first:mr-2.5;
-  }
-  &--link__line {
-    @apply border-none text-blue-400 bg-blue-400 h-0.5;
-  }
 }
 </style>

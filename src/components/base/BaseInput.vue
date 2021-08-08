@@ -1,6 +1,6 @@
 <template>
   <div class="base-input">
-    <label class="base-input__label">{{ label }}</label>
+    <label v-if="value" class="base-input__label">{{ label }}</label>
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"

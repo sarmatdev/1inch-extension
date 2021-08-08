@@ -12,6 +12,7 @@ module.exports = {
           primarygrad: '#495bfc',
           secondarygrad: '#114188'
         },
+        warning: '#ffc700',
         word: {
           03: '#fbfbfb',
           04: '#6c86ad8c',

@@ -1,26 +1,52 @@
 <template>
-  <div class="icon">
-    <img :src="require(`@/assets/icons${icon}.${iconType}`)" alt="" />
+  <div class="base-icon inline-block">
+    <i :data-feather="name" :width="iconSize" :height="iconSize" :fill="fill" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import feather from 'feather-icons'
+import { computed, defineComponent, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'BaseIcon',
+
   props: {
-    icon: String,
-    iconType: {
+    name: { type: String, required: true },
+    size: {
       type: String,
-      default: 'svg'
-    }
+      default: 'md',
+      validator: (val: string): boolean => {
+        return ['xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(val)
+      }
+    },
+    filled: { type: Boolean, default: false }
+  },
+  // #ffc700
+
+  setup(props) {
+    const iconSize = computed(() => {
+      switch (props.size) {
+        case 'xxs':
+          return '8'
+        case 'xs':
+          return '12'
+        case 'sm':
+          return '16'
+        case 'lg':
+          return '24'
+        case 'xl':
+          return '28'
+        default:
+          return '20'
+      }
+    })
+
+    const fill = computed(() => (props.filled ? 'currentColor' : 'none'))
+
+    onMounted(() => feather.replace())
+
+    return { iconSize, fill }
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.icon {
-  @apply flex justify-center items-center;
-}
-</style>

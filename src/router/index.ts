@@ -7,6 +7,20 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/swap',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    redirect: '/swap'
+  },
+  {
+    path: '/swap',
+    name: 'Swap',
+    component: () => import('../views/swap/Swap.vue'),
     meta: {
       requiresAuth: true
     }

@@ -1,9 +1,9 @@
 <template>
-  <div :class="`base__warning--${mode}`" class="base__warning">
+  <div :class="`base__warning--${name}`" class="base__warning">
     <div :class="`base__warning--${position}__container`">
       <base-icon
         :class="`base__warning--${position}__icon`"
-        :icon="`/token-input/${mode}`"
+        :name="name"
       ></base-icon>
       <span><slot /></span>
     </div>
@@ -20,10 +20,11 @@ export default defineComponent({
       default: 'vertically',
       validator: (value: string) => ['vertically', 'horizontal'].includes(value)
     },
-    mode: {
+    name: {
       type: String,
-      default: 'warning',
-      validator: (value: string) => ['info', 'warning'].includes(value)
+      default: 'alert-triangle',
+      validator: (value: string) =>
+        ['alert-circle', 'alert-triangle'].includes(value)
     }
   }
 })
@@ -48,11 +49,11 @@ export default defineComponent({
       @apply w-8 h-8 my-auto mr-2.5;
     }
   }
-  &--warning {
+  &--alert-triangle {
     @apply bg-red-600 text-red-600 bg-opacity-20;
   }
-  &--info {
-    @apply bg-yellow-400 bg-opacity-20 text-word-6;
+  &--alert-circle {
+    @apply bg-yellow-400 text-warning bg-opacity-20 text-word-6;
   }
 }
 </style>

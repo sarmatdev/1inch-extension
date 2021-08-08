@@ -1,0 +1,21 @@
+{
+  "key": "137",
+  "chainId": 137,
+  "chainName": "Polygon",
+  "name": "Polygon Mainnet",
+  "shortName": "Polygon",
+  "network": "polygon",
+  "unknown": false,
+  "rpc": "https://speedy-nodes-nyc.moralis.io/e7d110f4a238e0246bbe5278/polygon/mainnet",
+  "ws": "wss://speedy-nodes-nyc.moralis.io/e7d110f4a238e0246bbe5278/polygon/mainnet/ws",
+  "publicRpc": "https://rpc-mainnet.matic.network",
+  "explorer": "https://polygonscan.com",
+  "nativeAsset": {
+    "name": "Matic",
+    "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+    "symbol": "MATIC",
+    "decimals": 18,
+    "deeplinkId": "matic",
+    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png"
+  }
+}

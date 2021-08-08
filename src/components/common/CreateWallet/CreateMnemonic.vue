@@ -1,29 +1,32 @@
 <template>
   <main class="create__wallet">
-    <section class="create__wallet--create__mnemonic">
-      <h1 class="create__wallet--create__mnemonic__header">
-        Your mnemonic phrase
-      </h1>
-      <p class="create__wallet--create__mnemonic__description">
+    <section class="text-center grid grid-cols-1 gap-y-2 mb-10">
+      <h1 class="text-white font-black text-lg">Your mnemonic phrase</h1>
+      <p class="text-sm mx-2.5">
         Write down or copy this phrase in the correct order and keep it in a
         safe place.
       </p>
-      <base-warning position="horizontal" mode="info"
+      <base-warning position="horizontal" name="alert-circle"
         >Never give your recovery phrase to third parties, keep it in a safe
         place!</base-warning
       >
       <WordList :words="mnemonic" />
-      <button class="create__wallet--create__mnemonic__button">
-        <base-wrapper>
-          <base-icon
-            class="create__wallet--create__mnemonic__button--icon"
-            icon="/copy"
-          ></base-icon>
-          Copy
-        </base-wrapper>
+      <button
+        class="
+          mx-auto
+          text-blue-600
+          px-1
+          flex
+          justify-between
+          items-center
+          hover:text-blue-500
+        "
+      >
+        <base-icon class="mr-0.5" name="copy"></base-icon>
+        Copy
       </button>
     </section>
-    <section class="create__wallet--create__mnemonic__agreement">
+    <section class="w-full bg-back-9 text-sm">
       <input
         class="custom-checkbox"
         type="checkbox"
@@ -35,9 +38,10 @@
         able to access my funds</label
       >
       <base-button
+        color="blue"
         @click="continueToConfirm"
         :disabled="!agree"
-        class="create__wallet--create__mnemonic__agreement__button"
+        class="mx-10"
         >Continue</base-button
       >
     </section>
@@ -76,31 +80,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.create__wallet {
-  &--create__mnemonic {
-    @apply text-center grid grid-cols-1 gap-y-2 mb-10;
-    &__header {
-      @apply text-white font-black text-lg;
-    }
-    &__description {
-      @apply text-sm mx-2.5;
-    }
-    &__button {
-      @apply mx-auto text-blue-600 px-1 mb-10;
-      &--icon {
-        @apply w-4 h-4 mr-0.5;
-      }
-    }
-    &__agreement {
-      @apply fixed bottom-2 bg-back-9 text-sm;
-      width: 280px;
-      &__button {
-        @apply w-full;
-      }
-    }
-  }
-}
-
 /* для элемента input c type="checkbox" */
 .custom-checkbox {
   position: absolute;

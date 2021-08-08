@@ -3,7 +3,7 @@
     <div class="welcome__hero">
       <img
         src="../assets/images/wallet-welcome.png"
-        width="280"
+        width="360"
         alt="Welcome Image"
       />
       <h1 class="text-white font-black text-lg">Wallet is not connected</h1>
