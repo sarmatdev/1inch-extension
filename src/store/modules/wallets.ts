@@ -35,6 +35,9 @@ const actions = {
 
     commit('setWallet', encryptedWallet)
     setStorageItem(wallet.name, encryptedWallet)
+  },
+  sendTransaction(_, { web3, tx }) {
+    return web3.sendTransaction(tx)
   }
 }
 const getters = {
