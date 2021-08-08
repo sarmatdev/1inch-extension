@@ -7,6 +7,20 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/swap',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    redirect: '/swap'
+  },
+  {
+    path: '/swap',
+    name: 'Swap',
+    component: () => import('../views/swap/Swap.vue'),
     meta: {
       requiresAuth: true
     }
@@ -25,12 +39,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/import-wallet',
     name: 'ImportWallet',
     component: () => import('../views/wallet/ImportWallet.vue')
-  },
-  {
-    path: '/confirm-swap',
-    name: 'ConfirmSwap',
-    component: () => import('../views/swap/ConfirmSwap.vue'),
-    meta: {transitionName: 'slide'}
   }
 ]
 
