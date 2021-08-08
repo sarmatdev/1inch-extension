@@ -6,7 +6,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import WordList from '@/components/common/WordList.vue'
-import CreatePassword from '@/components/common/CreateWallet/CreatePassword.vue'
+// import CreatePassword from '@/components/common/CreateWallet/CreatePassword.vue'
 import CreateMnemonic from '@/components/common/CreateWallet/CreateMnemonic.vue'
 import ConfirmMnemonic from '@/components/common/CreateWallet/ConfirmMnemonic.vue'
 
@@ -16,23 +16,21 @@ export default defineComponent({
   components: {
     WordList,
     ConfirmMnemonic,
-    CreateMnemonic,
-    CreatePassword
+    CreateMnemonic
+    // CreatePassword
   },
   setup() {
     const store = useStore()
 
-    const hasPassword = computed(() => {
-      return store.getters['auth/hasPassword']
-    })
-    const step = ref(hasPassword.value ? 2 : 1)
+    // const hasPassword = computed(() => {
+    //   return store.getters['auth/hasPassword']
+    // })
+    const step = ref(1)
     const currentStep = computed(() => {
       switch (step.value) {
         case 1:
-          return 'CreatePassword'
-        case 2:
           return 'CreateMnemonic'
-        case 3:
+        case 2:
           return 'ConfirmMnemonic'
         default:
           return 'CreateMnemonic'
@@ -52,8 +50,8 @@ export default defineComponent({
       agree,
       nextStep,
       mnemonicForConfirm,
-      currentStep,
-      hasPassword
+      currentStep
+      // hasPassword
     }
   }
 })
