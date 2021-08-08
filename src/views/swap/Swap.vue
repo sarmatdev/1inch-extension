@@ -57,6 +57,7 @@ import useWeb3 from '@/services/web3/useWeb3'
 import TokenInput from '@/components/common/Swap/TokenInput.vue'
 import TokenOutput from '@/components/common/Swap/TokenOutput.vue'
 import ConfirmSwapModal from '@/components/common/Modals/ConfirmSwapModal.vue'
+import { createNotification } from '@/services/notification'
 
 export default defineComponent({
   name: 'Home',
@@ -105,11 +106,13 @@ export default defineComponent({
 
     async function approve() {
       const tx = await getApproveData()
-      console.log('tx', tx)
 
       sendTransaction({ web3: unref(wallet), tx })
         .then((data) => {
-          console.log('✅Approve', data)
+          createNotification({
+            title: 'Transaction Sent',
+            message: data.hash
+          })
         })
         .catch((e) => {
           console.log('❌Approve', e)

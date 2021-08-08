@@ -5,7 +5,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, watch } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
 import AppHeader from '@/components/common/App/AppHeader.vue'
 import { useStore } from 'vuex'
 import useWeb3 from '@/services/web3/useWeb3'
@@ -14,13 +14,19 @@ import useRefreshApi from './composables/useRefreshApi'
 export default defineComponent({
   components: { AppHeader },
   setup() {
-    useRefreshApi()
     const store = useStore()
     const { blockNumber } = useWeb3()
+    const isAuth = computed(() => store.getters['auth/isAuth'])
+
+    if (isAuth.value) {
+      useRefreshApi()
+    }
 
     watch(blockNumber, () => {
-      store.dispatch('swap/fetchTokens')
-      store.dispatch('swap/fetchAllowancesAndBalances')
+      if (isAuth.value) {
+        store.dispatch('swap/fetchTokens')
+        store.dispatch('swap/fetchAllowancesAndBalances')
+      }
     })
 
     console.log('Hello, 1inch!🐴')
@@ -33,20 +39,20 @@ export default defineComponent({
   width: 0;
   background: transparent;
 }
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  width: 100vw;
-  min-width: 300px;
-  height: 100vh;
-  min-height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  overflow: hidden;
-}
+// body {
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: border-box;
+//   width: 100vw;
+//   min-width: 300px;
+//   height: 100vh;
+//   min-height: 600px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   overflow: hidden;
+// }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
