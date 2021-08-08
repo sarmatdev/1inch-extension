@@ -4,11 +4,11 @@ export function toShowFormated(amount, decimals) {
   const InputAmount = new BigNumber(amount)
   const FormatedAmount = InputAmount.times(`1e-${decimals}`)
 
-  if (FormatedAmount < new BigNumber(1e-6)) {
+  if (FormatedAmount.toNumber() > 1) {
     return FormatedAmount.decimalPlaces(3).toNumber()
   }
 
-  if (FormatedAmount > new BigNumber(1e-6)) {
+  if (FormatedAmount.toNumber() < 1) {
     return FormatedAmount.decimalPlaces(6).toNumber()
   }
 }
