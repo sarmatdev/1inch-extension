@@ -1,12 +1,17 @@
 import { useStore } from 'vuex'
+import {RoundedFormat} from '@/composables/useNumbers'
 
-export function priceFor(address: string): any {
+export interface foundedMarket {
+  foundedMarket: number
+}
+
+export function marketFor(symbol,amount) {
   const store = useStore()
-  const tokens = store.getters['settings/tokens']
-
-  const foudedToken = tokens.address.find(address)
+  const markets = store.getters['swap/markets']
+  const foundedMarket = markets.find( market => market.symbol === symbol.toLowerCase()).current_price
+  const OutValue = RoundedFormat(foundedMarket * amount) 
 
   return {
-    foudedToken
+    OutValue
   }
 }

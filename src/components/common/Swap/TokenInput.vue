@@ -82,7 +82,7 @@
                     >
                   </div>
                 </div>
-                <span class="font-bold text-white">$32.11</span>
+                <span class="font-bold text-white">~$ 32</span>
               </div>
             </MenuItem>
             <MenuItem as="div" v-if="!filteredTokens.length">
@@ -105,25 +105,18 @@
           </MenuItems>
         </transition>
       </Menu>
-      <span
-        v-if="OutAmount"
-        class="text-right text-white text-xl w-44 bg-transparent"
-        >{{ OutAmount }}</span
-      >
       <input
-        v-if="!OutAmount"
         class="text-right text-white text-xl w-44 bg-transparent outline-none"
         type="number"
         placeholder="0"
         v-model="amount"
         v-bind="$attrs"
         :disabled="disabled"
-        @input="$emit('update:AmountValue', $event.target.value)"
       />
     </div>
     <div class="flex justify-between p-2 text-sm">
       <span>{{ selectedToken.symbol }}</span>
-      <span> ~$13.41 </span>
+      <span> ~${{ (marketFor(selectedToken.symbol, amount).OutValue) }} </span>
     </div>
   </div>
 </template>
@@ -133,7 +126,9 @@ import { defineComponent, computed, ref, watch, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import BN from 'bignumber.js'
+import { marketFor } from '@/composables/useTokens'
 import { IToken } from '@/types'
+
 
 export default defineComponent({
   name: 'TokenInput',
@@ -146,18 +141,12 @@ export default defineComponent({
   props: {
     title: { type: String, required: true },
     disabled: { type: Boolean },
-    defaultTokenIdx: Number,
-    AmountValue: Number,
-    OutAmount: {
-      type: Number,
-      default: 0
-    }
+    defaultTokenIdx: Number
   },
   setup(props, { emit }) {
     const store = useStore()
-
     const tokens = computed(() => store.getters['swap/tokens']).value
-    const amount = ref(0)
+    const amount = ref(null)
     // @ts-ignore
     const selectedToken = ref({ ...tokens[props.defaultTokenIdx], amount: 0 })
 
@@ -206,7 +195,8 @@ export default defineComponent({
       tokenForSearch,
       balances,
       needApprove,
-      insufficientBalance
+      insufficientBalance,
+      marketFor
     }
   }
 })

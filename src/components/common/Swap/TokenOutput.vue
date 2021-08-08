@@ -106,12 +106,18 @@
         :value="toShowFormated(selectedToken.amount, selectedToken.decimals)"
         v-bind="$attrs"
         :disabled="disabled"
-        @input="$emit('update:AmountValue', $event.target.value)"
       />
     </div>
     <div class="flex justify-between p-2 text-sm">
       <span>{{ selectedToken.symbol }}</span>
-      <span> ~$13.41 </span>
+      <span>
+        ~${{
+          marketFor(
+            selectedToken.symbol,
+            toShowFormated(selectedToken.amount, selectedToken.decimals)
+          ).OutValue
+        }}
+      </span>
     </div>
   </div>
 </template>
@@ -122,6 +128,7 @@ import { useStore } from 'vuex'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { IToken } from '@/types'
 import { toShowFormated } from '@/composables/useNumbers'
+import { marketFor } from '@/composables/useTokens'
 
 export default defineComponent({
   name: 'TokenOutput',
@@ -142,7 +149,10 @@ export default defineComponent({
 
     const tokens = computed(() => store.getters['swap/tokens']).value
 
-    const selectedToken = ref({ ...tokens[props.defaultTokenIdx], amount: 0 })
+    const selectedToken = ref({
+      ...tokens[props.defaultTokenIdx],
+      amount: 0
+    })
 
     const tokenForSearch = ref('')
     const filteredTokens = computed(() => {
@@ -171,7 +181,8 @@ export default defineComponent({
       filteredTokens,
       tokenForSearch,
       balances,
-      toShowFormated
+      toShowFormated,
+      marketFor
     }
   }
 })
