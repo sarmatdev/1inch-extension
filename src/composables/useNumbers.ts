@@ -5,13 +5,13 @@ export function toShowFormated(
   decimals
 ) {
   const InputAmount = new BigNumber(amount)
-  const FormatedAmount = InputAmount.times(`1e-${decimals}`)
-
-  if (FormatedAmount < new BigNumber(1e-6)) {
-    return FormatedAmount.decimalPlaces(5).toNumber()
+  const FormatedAmount = InputAmount.times(`1e-${decimals}`).decimalPlaces(5)
+  console.log(FormatedAmount)
+  if (FormatedAmount.toNumber() < 1) {
+    return FormatedAmount.toNumber()
   }
 
-  if (FormatedAmount > new BigNumber(1e-6)) {
+  if (FormatedAmount.toNumber() > 1) {
     return FormatedAmount.decimalPlaces(2).toNumber()
   }
 }

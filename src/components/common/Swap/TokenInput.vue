@@ -150,7 +150,10 @@ export default defineComponent({
   props: {
     title: { type: String, required: true },
     disabled: { type: Boolean },
-    defaultTokenIdx: Number,
+    defaultTokenIdx: {
+      type: Number,
+      default: 0
+        },
     AmountValue: Number,
     OutAmount: {
       type: Number,

@@ -80,18 +80,20 @@ export default defineComponent({
     }
 
     function AmountChangeHandler() {
-      getQuote(
-        tokenIn.value.value.address,
-        tokenOut.value.value.address,
-        toSendFormated(AmountIn.value, tokenIn.value.value.decimals)
-      ).then((response) =>
-        hanldeOutAmount(
-          toShowFormated(
-            response.data.toTokenAmount,
-            tokenOut.value.value.decimals
+      if (AmountIn.value) {
+        getQuote(
+          tokenIn.value.value.address,
+          tokenOut.value.value.address,
+          toSendFormated(AmountIn.value, tokenIn.value.value.decimals)
+        ).then((response) =>
+          hanldeOutAmount(
+            toShowFormated(
+              response.data.toTokenAmount,
+              tokenOut.value.value.decimals
+            )
           )
         )
-      )
+      }
     }
 
     // watchEffect(() => {
