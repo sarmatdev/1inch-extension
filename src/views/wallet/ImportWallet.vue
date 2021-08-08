@@ -7,9 +7,13 @@
       class="import__wallet__input"
     ></base-input>
     <base-textarea label="Private key" v-model="source"></base-textarea>
-    <base-button color="gradient" @click="importWallet">Import</base-button>
+    <base-button
+      color="gradient"
+      :disabled="!isValidSource"
+      @click="importWallet"
+      >Import</base-button
+    >
   </section>
-  {{ isValidSource }}
 </template>
 
 <script lang="ts">
@@ -41,8 +45,9 @@ export default defineComponent({
           address: importedWallet.value.address,
           privateKey: importedWallet.value.privateKey
         })
+        store.commit('auth/setAuth', true)
 
-        router.push('/')
+        router.push('/swap')
       }
     }
 

@@ -62,8 +62,9 @@ export default defineComponent({
         address: mnemonicConfirmed.value.address,
         privateKey: mnemonicConfirmed.value.privateKey
       })
+      store.commit('auth/setAuth', true)
 
-      router.push('/')
+      router.push('/swap')
     }
 
     return {

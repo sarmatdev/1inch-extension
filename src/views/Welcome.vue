@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="flex flex-col justify-between">
     <div class="welcome__hero">
       <img
         src="../assets/images/wallet-welcome.png"
@@ -10,8 +10,8 @@
       <p>You can import an existing wallet or create a new one</p>
     </div>
     <div class="grid grid-cols-2 gap-x-4 mt-auto">
-      <base-button to="/create-wallet">Create</base-button>
-      <base-button to="/import-wallet">Import</base-button>
+      <base-button color="primary" to="/create-wallet">Create</base-button>
+      <base-button color="primary" to="/import-wallet">Import</base-button>
     </div>
   </div>
 </template>
@@ -22,10 +22,4 @@ import { defineComponent } from 'vue'
 export default defineComponent({})
 </script>
 
-<style lang="scss">
-.welcome {
-  @apply flex flex-col justify-between;
-  &__hero {
-  }
-}
-</style>
+<style lang="scss"></style>

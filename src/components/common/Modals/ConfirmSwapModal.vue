@@ -145,13 +145,11 @@ export default defineComponent({
 
     async function swap() {
       const tx = await swapTx()
-      console.log('tx', tx)
 
       sendTransaction({ web3: unref(wallet), tx })
         .then((data) => {
-          console.log('✅', data)
           createNotification({
-            title: 'Transaction Confirmed',
+            title: 'Transaction Sent',
             message: data.hash
           })
         })

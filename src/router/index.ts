@@ -1,16 +1,22 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
-// import store from '@/store'
+import store from '@/store'
+
+function guardMyroute(to, from, next) {
+  const isAuth = store.getters['auth/isAuth']
+  if (isAuth) {
+    next() // allow to enter route
+  } else {
+    next('/welcome') // go to '/login';
+  }
+}
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     component: Home,
-    redirect: '/swap',
-    meta: {
-      requiresAuth: true
-    }
+    redirect: '/swap'
   },
   {
     path: '/:pathMatch(.*)*',
@@ -21,9 +27,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/swap',
     name: 'Swap',
     component: () => import('../views/swap/Swap.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    beforeEnter: guardMyroute
   },
   {
     path: '/welcome',
@@ -48,8 +52,19 @@ const router = createRouter({
 })
 
 // router.beforeEach((to, from, next) => {
+//   const isAuth = store.getters['auth/isAuth']
+//   // @ts-ignore
+//   console.log(store.state.auth.isAuth, isAuth)
+//   // if (to.matched.some((record) => record.meta.requiresAuth)) {
+//   //   if (!isAuth) {
+//   //     next('/welcome')
+//   //   }
+//   // } else {
+//   //   next()
+//   // }
+
 //   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (!store.getters['auth/isAuth']) {
+//     if (!isAuth) {
 //       next('/welcome')
 //     }
 //   } else {

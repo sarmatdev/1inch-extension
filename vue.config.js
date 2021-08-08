@@ -4,11 +4,18 @@ const path = require('path')
 
 module.exports = {
   filenameHashing: false,
+  // pages: {
+  //   popup: {
+  //     template: 'public/index.html',
+  //     entry: './src/index.ts',
+  //     title: '1inch Extension'
+  //   }
+  // },
   configureWebpack: {
     mode: process.env.NODE_ENV,
     entry: {
       entry: `src/index.ts`,
-      filename: `popup.html`
+      filename: `index.html`
     },
     output: {
       path: path.resolve(__dirname, './dist'),
@@ -24,11 +31,11 @@ module.exports = {
         {
           from: 'src/icons',
           to: './icons'
-        },
-        {
-          from: 'src/index.html',
-          to: './popup/index.html'
         }
+        // {
+        //   from: 'src/index.html',
+        //   to: './popup/index.html'
+        // }
       ])
     ]
   }
